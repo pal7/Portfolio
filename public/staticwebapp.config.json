@@ -1,0 +1,15 @@
+{
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/assets/*", "/favicon.svg"]
+  },
+  "globalHeaders": {
+    "cache-control": "no-cache",
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "SAMEORIGIN",
+    "X-XSS-Protection": "1; mode=block"
+  },
+  "mimeTypes": {
+    ".svg": "image/svg+xml"
+  }
+}
