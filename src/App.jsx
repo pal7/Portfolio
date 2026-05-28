@@ -169,7 +169,7 @@ const WEBSITES = [
     type: "Client Project",
     typeColor: "teal",
     hosting: "Ongoing maintenance",
-    previewImg: null,
+    previewImg: "/previews/burnabychiro.png",
     summary: "End-to-end design and build for a chiropractic clinic in Burnaby, BC — from initial wireframes through visual design to production. First client project. Appeared in the first 10 Google search results within 2 months of launch.",
     bullets: [
       "Owned the full product design lifecycle: user research, wireframing, visual design, and frontend build — solo",
@@ -201,7 +201,7 @@ const WEBSITES = [
       "Full PWA — installable on Android/iOS with offline shell and push notifications for events",
     ],
     stack: ["TypeScript", "Node.js", "Express", "Vite", "Docker", "SQLite", "OVH", "Shell"],
-    previewImg: null,
+    previewImg: "/previews/cns.png",
   },
 ];
 
