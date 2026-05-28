@@ -99,7 +99,7 @@ const BMO_GROUPS = [
         },
         contribution: "Built trading dashboard components, Redoc micro-app, multi-step reactive forms, account flows, and ongoing feature delivery across web and mobile (Angular + Capacitor).",
         stack: ["Angular 19", "Capacitor", "TypeScript", "RxJS", "Redoc", "Azure DevOps"],
-        preview: null,
+        previewImg: null,
       },
       {
         id: "smartfolio",
@@ -111,7 +111,7 @@ const BMO_GROUPS = [
         },
         contribution: "Led migration from legacy AngularJS to Angular 19 — rebuilt components, services, and routing to modern Angular patterns while keeping the platform live.",
         stack: ["Angular 19", "AngularJS", "TypeScript", "RxJS"],
-        preview: null,
+        previewImg: null,
       },
     ],
   },
@@ -158,6 +158,9 @@ const BMO_GROUPS = [
   },
 ];
 
+// To add previews: take a screenshot of each homepage (Cmd+Shift+4 full browser window)
+// Save to public/previews/ as burnabychiro.png and cns.png
+// Then change previewImg: null to previewImg: "/previews/burnabychiro.png" etc.
 const WEBSITES = [
   {
     title: "Burnaby Chiropractic",
@@ -166,7 +169,7 @@ const WEBSITES = [
     type: "Client Project",
     typeColor: "teal",
     hosting: "Ongoing maintenance",
-    previewNote: "Live site — visit to view",
+    previewImg: null,
     summary: "End-to-end design and build for a chiropractic clinic in Burnaby, BC — from initial wireframes through visual design to production. First client project. Appeared in the first 10 Google search results within 2 months of launch.",
     bullets: [
       "Owned the full product design lifecycle: user research, wireframing, visual design, and frontend build — solo",
@@ -198,7 +201,7 @@ const WEBSITES = [
       "Full PWA — installable on Android/iOS with offline shell and push notifications for events",
     ],
     stack: ["TypeScript", "Node.js", "Express", "Vite", "Docker", "SQLite", "OVH", "Shell"],
-    iframeUrl: "https://www.canadanagaratharsangam.com",
+    previewImg: null,
   },
 ];
 
@@ -277,6 +280,28 @@ function BulletList({ items, color = "#374151", size = 14 }) {
   );
 }
 
+function ToggleButton({ expanded }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <button
+      type="button"
+      title={expanded ? "Collapse" : "Expand"}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        width: 28, height: 28, borderRadius: "50%",
+        background: hovered ? "var(--accent-blue)" : "var(--bg-inset)",
+        border: hovered ? "1px solid var(--accent-blue)" : "1px solid var(--border)",
+        color: hovered ? "#ffffff" : "var(--text-secondary)",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        cursor: "pointer", transition: "all 0.2s ease", flexShrink: 0,
+        fontSize: 18,
+        transform: expanded ? "rotate(45deg)" : "rotate(0deg)",
+      }}
+    >+</button>
+  );
+}
+
 function NavButton({ label, onClick }) {
   const [hovered, setHovered] = useState(false);
   return (
@@ -347,6 +372,8 @@ function FooterSocialLink({ label, href, iconName }) {
 function FeaturedCard({ project }) {
   const [open, setOpen] = useState(false);
   const [hovered, setHovered] = useState(false);
+  const [iframeLoading, setIframeLoading] = useState(true);
+  const [iframeError, setIframeError] = useState(false);
   const statusC = TAG_STYLE[project.statusColor] || TAG_STYLE.green;
 
   return (
@@ -381,14 +408,7 @@ function FeaturedCard({ project }) {
               textTransform: "uppercase", letterSpacing: "0.05em",
             }}>{project.status}</span>
           </div>
-          <div style={{
-            width: 26, height: 26, borderRadius: "50%",
-            border: "0.5px solid #d1d5db",
-            display: "flex", alignItems: "center", justifyContent: "center",
-            color: "var(--text-secondary)", fontSize: 18, flexShrink: 0,
-            transition: "transform 0.2s",
-            transform: open ? "rotate(45deg)" : "rotate(0)",
-          }}>+</div>
+          <ToggleButton expanded={open} />
         </div>
 
         <div>
@@ -468,23 +488,43 @@ function FeaturedCard({ project }) {
                   <div style={{
                     flex: 1, height: 15, background: "var(--bg-subtle)",
                     borderRadius: 10, marginLeft: 8,
-                    display: "flex", alignItems: "center", paddingLeft: 10,
+                    display: "flex", alignItems: "center", paddingLeft: 10, gap: 8,
                   }}>
                     <span style={{ fontSize: 9, color: "var(--text-muted)", fontFamily: "monospace" }}>
                       {project.iframeUrl.replace("https://", "")}
                     </span>
+                    {iframeLoading && !iframeError && (
+                      <span style={{ fontSize: 9, color: "var(--text-muted)", fontStyle: "italic" }}>Loading preview…</span>
+                    )}
                   </div>
                   <a href={project.iframeUrl} target="_blank" rel="noopener noreferrer"
                     style={{ fontSize: 9, color: "var(--accent-blue)", textDecoration: "none", marginLeft: 6, flexShrink: 0 }}>
                     ↗
                   </a>
                 </div>
-                <iframe
-                  src={project.iframeUrl}
-                  title={`${project.title} live preview`}
-                  style={{ width: "100%", height: 380, border: "none", display: "block" }}
-                  loading="lazy"
-                />
+                {iframeError ? (
+                  <div style={{
+                    height: 380, display: "flex", flexDirection: "column",
+                    alignItems: "center", justifyContent: "center",
+                    background: "var(--bg-subtle)", gap: 12,
+                  }}>
+                    <p style={{ fontSize: 13, color: "var(--text-muted)", margin: 0 }}>Preview unavailable</p>
+                    <a href={project.iframeUrl} target="_blank" rel="noopener noreferrer" style={{
+                      fontSize: 13, color: "var(--accent-blue)", textDecoration: "none",
+                      border: "0.5px solid var(--accent-border)", padding: "6px 14px",
+                      borderRadius: "var(--radius-sm)", background: "var(--accent-bg)",
+                    }}>Try it →</a>
+                  </div>
+                ) : (
+                  <iframe
+                    src={project.iframeUrl}
+                    title={`${project.title} live preview`}
+                    style={{ width: "100%", height: 380, border: "none", display: "block" }}
+                    loading="lazy"
+                    onLoad={() => setIframeLoading(false)}
+                    onError={() => { setIframeLoading(false); setIframeError(true); }}
+                  />
+                )}
               </div>
             </div>
           )}
@@ -704,7 +744,7 @@ function BMOProductCard({ p }) {
         transform: hovered ? "translateY(-1px)" : "translateY(0)",
       }}
     >
-      <SitePreview url={p.links.web} src={p.preview} title={p.name} />
+      <SitePreview url={p.links.web} src={p.previewImg} title={p.name} />
       <div style={{ padding: "1rem" }}>
         <div style={{ marginBottom: 7 }}>
           <Tag label={p.type} color={p.tagColor} small />
@@ -759,14 +799,7 @@ function BMOPersGroup({ group }) {
               PCT — Personalization Campaign Tracker
             </h4>
           </div>
-          <div style={{
-            width: 22, height: 22, borderRadius: "50%",
-            border: "0.5px solid #d1d5db", flexShrink: 0,
-            display: "flex", alignItems: "center", justifyContent: "center",
-            fontSize: 16, color: "var(--text-secondary)",
-            transition: "transform 0.2s",
-            transform: pctOpen ? "rotate(45deg)" : "rotate(0)",
-          }}>+</div>
+          <ToggleButton expanded={pctOpen} />
         </div>
         {pctOpen && (
           <div style={{ padding: "0 1.25rem 1.25rem", borderTop: "0.5px solid #f3f4f6" }}>
@@ -903,7 +936,7 @@ function WebsiteCard({ site }) {
       }}
     >
       {/* Preview */}
-      <SitePreview url={site.url} src={site.preview} title={site.title} />
+      <SitePreview url={site.url} src={site.previewImg} title={site.title} />
 
       {/* Content */}
       <div style={{ padding: "1.25rem", display: "flex", flexDirection: "column", gap: 10, flex: 1 }}>
@@ -1167,7 +1200,7 @@ export default function Portfolio() {
               fontSize: 18, fontWeight: 700, color: "#ffffff",
               fontFamily: "'Georgia',serif", letterSpacing: "-0.01em",
             }}>AR</span>
-            <span style={{ fontSize: 13, color: "#666666" }}>Senior Frontend Engineer · Toronto</span>
+            <span style={{ fontSize: 13, color: "#666666" }}>Frontend Product Engineer · Toronto</span>
           </div>
           {/* Middle row: social links */}
           <div style={{ display: "flex", justifyContent: "center", gap: 32, marginBottom: "2rem" }}>
