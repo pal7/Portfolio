@@ -167,7 +167,7 @@ const WEBSITES = [
     year: "2020",
     type: "Client Project",
     typeColor: "teal",
-    hosting: "Ongoing maintenance",
+    hosting: "Wireframe · Design · Full build · Maintenance",
     previewImg: "/previews/burnabychiro.png",
     summary: "End-to-end design and build for a chiropractic clinic in Burnaby, BC, from initial wireframes through visual design to production. First client project. Appeared in the first 10 Google search results within 2 months of launch.",
     bullets: [
@@ -1037,7 +1037,7 @@ export default function Portfolio() {
           <p style={{
             fontSize: 12, color: "var(--text-muted)", textTransform: "uppercase",
             letterSpacing: "0.1em", margin: "0 0 14px",
-          }}>AI Product Engineer · Toronto, CA</p>
+          }}>Frontend-Focused Full-Stack Developer · Toronto, CA</p>
           <h1 style={{
             fontSize: "clamp(34px,6vw,52px)", fontWeight: 700,
             margin: "0 0 18px", lineHeight: 1.08,
@@ -1048,11 +1048,11 @@ export default function Portfolio() {
             fontSize: 17, color: "var(--text-secondary)", lineHeight: 1.75,
             maxWidth: 540, margin: "0 0 28px",
           }}>
-            AI Product Engineer and Full-Stack Developer with 8 years of experience shipping
-            production applications for Fortune 500 financial institutions. Currently at BMO
-            InvestorLine via TCS, with deep roots in Angular, Adobe Target, and enterprise-scale
-            UI systems. Building AI-powered side projects in personalization, agentic automation,
-            and bilingual product design on the side.
+            Frontend-focused Full-Stack Developer and AI Product Engineer with 8 years of experience
+            shipping production applications for Fortune 500 financial institutions. Currently at BMO
+            InvestorLine via TCS, with deep roots in Angular, React, and enterprise-scale UI systems.
+            Building AI-powered side projects in personalization, agentic automation, and bilingual
+            product design on the side.
           </p>
           <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
             <HeroSocialLink label="LinkedIn" href="https://www.linkedin.com/in/ashwin-ramani/" iconName="linkedin" primary />
