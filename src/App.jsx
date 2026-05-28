@@ -51,8 +51,7 @@ const FEATURED_PROJECTS = [
     status: "In Progress",
     statusColor: "amber",
     url: null,
-    github: null,
-    githubNote: "Code will be published to GitHub once MVP is complete",
+    github: "https://github.com/pal7/kanmani",
     summary:
       "A production-quality bilingual AI chat PWA for Tamil speakers — diaspora in Toronto and globally. Users switch between English and Tamil mid-conversation; the app routes to different Azure OpenAI models per language and mirrors the user's register (formal, casual, Tanglish code-mixed).",
     detail: [
