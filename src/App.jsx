@@ -7,7 +7,7 @@ const FEATURED_PROJECTS = [
     id: "pers-engine",
     tag: "AI / Full Stack",
     tagColor: "purple",
-    title: "PersAI — pers-engine",
+    title: "PersAI: pers-engine",
     subtitle: "AI-powered UX analysis tool",
     status: "Live",
     statusColor: "green",
@@ -15,7 +15,7 @@ const FEATURED_PROJECTS = [
     github: "https://github.com/pal7/pers-engine",
     iframeUrl: "https://gray-moss-0a4c7ec0f.7.azurestaticapps.net/",
     summary:
-      "Submit any URL — PersAI scrapes the page with an agentic Playwright session, runs it through Azure OpenAI GPT-5.2 vision, and returns structured UX issues with severity scoring and A/B experiment hypotheses.",
+      "Submit any URL and PersAI scrapes the page with an agentic Playwright session, runs it through Azure OpenAI GPT-5.2 vision, and returns structured UX issues with severity scoring and A/B experiment hypotheses.",
     detail: [
       {
         heading: "How it works",
@@ -31,7 +31,7 @@ const FEATURED_PROJECTS = [
       },
       {
         heading: "Infrastructure",
-        body: "React/Vite/TypeScript frontend on Azure Static Web Apps. Node/Express backend on Azure Container Apps with managed identity reading secrets from Key Vault — no .env in prod. Cosmos DB for result caching. GitHub Actions CI/CD: push to main → build → deploy both SWA and Container App.",
+        body: "React/Vite/TypeScript frontend on Azure Static Web Apps. Node/Express backend on Azure Container Apps with managed identity reading secrets from Key Vault, no secrets in env files. Cosmos DB for result caching. GitHub Actions CI/CD on every push to main.",
       },
     ],
     stack: ["React 18", "TypeScript", "Vite", "Node/Express", "Playwright", "Azure OpenAI GPT-5.2", "Azure Container Apps", "Azure Static Web Apps", "Cosmos DB", "Azure Blob Storage", "Azure AI Foundry", "Docker"],
@@ -53,23 +53,23 @@ const FEATURED_PROJECTS = [
     url: null,
     github: "https://github.com/pal7/kanmani",
     summary:
-      "A production-quality bilingual AI chat PWA for Tamil speakers — diaspora in Toronto and globally. Users switch between English and Tamil mid-conversation; the app routes to different Azure OpenAI models per language and mirrors the user's register (formal, casual, Tanglish code-mixed).",
+      "A production-quality bilingual AI chat PWA built for Tamil speakers in Toronto and around the world. Users switch between English and Tamil mid-conversation; the app routes to different Azure OpenAI models per language and mirrors the user's register (formal, casual, Tanglish code-mixed).",
     detail: [
       {
         heading: "The gap it fills",
-        body: "Existing Tamil AI tools (Lavanya, Chat AI Tamil, TamilAI.in) are basic wrappers with no real bilingual UX. Kanmani is designed mobile-first (Android PWA), installable, with an offline shell — and it responds in the script and register the user is actually writing in, including code-mixed Tanglish.",
+        body: "Existing Tamil AI tools (Lavanya, Chat AI Tamil, TamilAI.in) are basic wrappers with no real bilingual UX. Kanmani is designed mobile-first (Android PWA), installable, with an offline shell, and it responds in the script and register the user is actually writing in, including code-mixed Tanglish.",
       },
       {
         heading: "Bilingual architecture",
-        body: "Language is first-class: it determines the UI strings, system prompt, font stack, and AI model. Tamil routes to GPT-4o (full model — Tamil needs it; tokenization is 3-4× denser than English). English routes to GPT-4o-mini for cost efficiency. Auto-generated chat titles always use gpt-4o-mini regardless of language. Mid-chat language switch rotates the system prompt live.",
+        body: "Language is first-class: it determines the UI strings, system prompt, font stack, and AI model. Tamil routes to GPT-4o (full model, since Tamil tokenization runs 3-4x denser than English). English routes to GPT-4o-mini for cost efficiency. Auto-generated chat titles always use gpt-4o-mini regardless of language. Mid-chat language switch rotates the system prompt live.",
       },
       {
         heading: "Streaming & infra",
-        body: "SSE (Server-Sent Events) for token-by-token streaming — chosen over WebSockets because the stream is one-directional and SSE survives most corporate proxies. Context window is token-aware via tiktoken (o200k_base), not message-count — critical for Tamil's token density. Auth via Supabase (email + Google OAuth) with RLS-enforced Postgres.",
+        body: "SSE (Server-Sent Events) for token-by-token streaming, chosen over WebSockets because the stream is one-directional and SSE survives most corporate proxies. Context window is token-aware via tiktoken (o200k_base), not message-count, which matters a lot given Tamil's token density. Auth via Supabase (email + Google OAuth) with RLS-enforced Postgres.",
       },
       {
         heading: "Design system",
-        body: "Warm paper palette (#FAF6F0 background, terracotta accent #C24A2D) with a subtle Kolam (கோலம்) motif on empty states. Brand mark is the Tamil character ஃ. Noto Sans Tamil is self-hosted — Google Fonts CDN is unreliable in India. Fraunces for display, DM Sans for Latin body copy.",
+        body: "Warm paper palette (#FAF6F0 background, terracotta accent #C24A2D) with a subtle Kolam (கோலம்) motif on empty states. Brand mark is the Tamil character ஃ. Noto Sans Tamil is self-hosted since Google Fonts CDN is unreliable in India. Fraunces for display, DM Sans for Latin body copy.",
       },
     ],
     stack: ["React 18", "TypeScript", "Vite", "TailwindCSS", "Zustand", "Node/Express", "SSE", "Azure AI Foundry", "GPT-4o", "GPT-4o-mini", "Phi-4", "Supabase Auth", "Supabase Postgres", "PWA / Workbox", "Azure Static Web Apps", "tiktoken"],
@@ -108,7 +108,7 @@ const BMO_GROUPS = [
         links: {
           web: "https://www.bmosmartfolio.com/client/#/onboarding/expectation-setting",
         },
-        contribution: "Led migration from legacy AngularJS to Angular 19 — rebuilt components, services, and routing to modern Angular patterns while keeping the platform live.",
+        contribution: "Led the migration from legacy AngularJS to Angular 19, rebuilding components, services, and routing to modern Angular patterns while keeping the platform live.",
         stack: ["Angular 19", "AngularJS", "TypeScript", "RxJS"],
         previewImg: "/previews/sf.png",
       },
@@ -117,7 +117,7 @@ const BMO_GROUPS = [
   {
     id: "personalization",
     label: "Personalization & A/B Testing",
-    description: "End-to-end ownership of the personalization and experimentation stack for InvestorLine — campaign implementation, internal tooling, and live-test monitoring.",
+    description: "End-to-end ownership of the personalization and experimentation stack for InvestorLine, covering campaign implementation, internal tooling, and live-test monitoring.",
     stack: [
       "Adobe Target", "A/B Testing", "MVT", "Experience Targeting",
       "Adobe Analytics", "Adobe Launch", "Salesforce Marketing Cloud",
@@ -125,8 +125,8 @@ const BMO_GROUPS = [
     ],
     summary: "Designed and delivered A/B, multivariate (MVT), and experience targeting campaigns via Adobe Target across trading dashboard and onboarding flows. Built pers-tsc-gen, an internal TypeScript code generator that scaffolded Adobe Target scripts and reduced campaign setup time ~60%. Integrated Salesforce Marketing Cloud for triggered email journeys tied to in-app actions. Instrumented Adobe Analytics with a typed Angular service layer covering 100+ tracked interactions.",
     pct: {
-      title: "PCT — Personalization Campaign Tracker",
-      summary: "Internal tool to detect silently broken Adobe Target activities caused by DOM changes, ID updates, or content shifts that Adobe's dashboard doesn't surface. Built the Gatsby frontend UI — a health dashboard showing live test status (OK / warning / broken) with expandable detail per campaign, backed by a Puppeteer headless Chrome validation service.",
+      title: "PCT: Personalization Campaign Tracker",
+      summary: "Internal tool to detect silently broken Adobe Target activities caused by DOM changes, ID updates, or content shifts that Adobe's dashboard doesn't surface. Built the Gatsby frontend UI, a health dashboard showing live test status (OK / warning / broken) with expandable detail per campaign, backed by a Puppeteer headless Chrome validation service.",
       status: "UI built · Not shipped (cloud funding not approved)",
       stack: ["Gatsby", "TypeScript", "Puppeteer", "REST APIs"],
       diagram: true,
@@ -142,7 +142,7 @@ const BMO_GROUPS = [
         name: "OneTrust Cookie Consent",
         tagColor: "coral",
         type: "GDPR / CCPA compliance",
-        summary: "Implemented OneTrust SDK across InvestorLine and Smartfolio. Built consent-aware script blocking — third-party tags (analytics, marketing, functional) fire conditionally based on user consent state. Coordinated with legal to map cookie categories to OneTrust groups.",
+        summary: "Implemented OneTrust SDK across InvestorLine and Smartfolio. Built consent-aware script blocking where third-party tags (analytics, marketing, functional) fire conditionally based on user consent state. Coordinated with legal to map cookie categories to OneTrust groups.",
         stack: ["OneTrust SDK", "Angular", "TypeScript", "GDPR", "CCPA"],
       },
       {
@@ -169,12 +169,12 @@ const WEBSITES = [
     typeColor: "teal",
     hosting: "Ongoing maintenance",
     previewImg: "/previews/burnabychiro.png",
-    summary: "End-to-end design and build for a chiropractic clinic in Burnaby, BC — from initial wireframes through visual design to production. First client project. Appeared in the first 10 Google search results within 2 months of launch.",
+    summary: "End-to-end design and build for a chiropractic clinic in Burnaby, BC, from initial wireframes through visual design to production. First client project. Appeared in the first 10 Google search results within 2 months of launch.",
     bullets: [
-      "Owned the full product design lifecycle: user research, wireframing, visual design, and frontend build — solo",
-      "Designed for local conversion: clear CTAs, trust signals, and a contact flow optimized for appointment bookings",
+      "Owned the full product design lifecycle: user research, wireframing, visual design, and frontend build, all working solo",
+      "Designed for local conversion with clear CTAs, trust signals, and a contact flow optimized for appointment bookings",
       "Achieved first-page Google ranking within 2 months via semantic HTML5, schema.org local business markup, and on-page SEO",
-      "Custom reviews and treatments sliders in vanilla JS — modular, no framework dependency, built for easy client handoff",
+      "Custom reviews and treatments sliders in vanilla JS, modular and framework-free, built for easy client handoff",
       "Optimized Core Web Vitals: sub-2s LCP on mobile, zero CLS",
     ],
     stack: ["HTML5", "CSS3", "JavaScript", "Figma / Wireframing", "SEO", "Schema.org"],
@@ -186,18 +186,18 @@ const WEBSITES = [
     type: "Volunteer",
     typeColor: "purple",
     hosting: "OVH · Docker",
-    summary: "Full-stack web application for the Canada chapter of a Tamil cultural organization — events, gallery, membership, and community features. Built with TypeScript, Node/Express, and Docker on OVH. UI designed with Claude. Volunteer contribution alongside two other developers. Private repo.",
+    summary: "Full-stack web application for the Canada chapter of a Tamil cultural organization, covering events, gallery, membership, and community features. Built with TypeScript, Node/Express, and Docker on OVH. UI designed with Claude. Volunteer contribution alongside two other developers. Private repo.",
     bullets: [
       "TypeScript full-stack: Vite frontend + Node/Express backend, containerized with Docker and deployed via a custom shell deploy script to OVH",
-      "Docker Compose deployment — script auto-installs Docker on the target server, builds the image, and runs the app; supports --init-db flag for first-time database seeding",
+      "Docker Compose deployment where the script auto-installs Docker on the target server, builds the image, and runs the app; supports --init-db flag for first-time database seeding",
       "Server-side SQLite with optional matrimonial and login/signup feature flags via environment config",
       "Mobile-first responsive layout covering events calendar, gallery, and membership",
     ],
     roadmap: [
-      "Member login portal — authenticated accounts with profile pages and member directory",
-      "Interactive event planning — RSVP, potluck coordination, and volunteer sign-up for community events",
-      "Member-to-member features — see who else is attending, connect with other members",
-      "Full PWA — installable on Android/iOS with offline shell and push notifications for events",
+      "Member login portal with authenticated accounts, profile pages, and a member directory",
+      "Interactive event planning with RSVP, potluck coordination, and volunteer sign-up for community events",
+      "Member-to-member features to see who else is attending and connect with other members",
+      "Full PWA, installable on Android and iOS with an offline shell and push notifications for events",
     ],
     stack: ["TypeScript", "Node.js", "Express", "Vite", "Docker", "SQLite", "OVH", "Shell"],
     previewImg: "/previews/cns.png",
@@ -563,7 +563,7 @@ function PCTDiagram() {
   return (
     <div style={{ margin: "20px 0 8px", overflowX: "auto" }}>
       <p style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--text-muted)", margin: "0 0 10px" }}>
-        Proposed infrastructure (not shipped — AWS funding not approved)
+        Proposed infrastructure (not shipped, AWS funding was not approved)
       </p>
       <svg viewBox="0 0 700 380" style={{ width: "100%", minWidth: 560, display: "block" }} xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -795,7 +795,7 @@ function BMOPersGroup({ group }) {
               <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "system-ui" }}>UI built · not shipped</span>
             </div>
             <h4 style={{ fontSize: 15, fontWeight: 600, margin: 0, color: "var(--text-primary)", fontFamily: "'Georgia',serif" }}>
-              PCT — Personalization Campaign Tracker
+              PCT: Personalization Campaign Tracker
             </h4>
           </div>
           <ToggleButton expanded={pctOpen} />
@@ -1037,7 +1037,7 @@ export default function Portfolio() {
           <p style={{
             fontSize: 12, color: "var(--text-muted)", textTransform: "uppercase",
             letterSpacing: "0.1em", margin: "0 0 14px",
-          }}>Senior Frontend Engineer · Toronto, CA</p>
+          }}>AI Product Engineer · Toronto, CA</p>
           <h1 style={{
             fontSize: "clamp(34px,6vw,52px)", fontWeight: 700,
             margin: "0 0 18px", lineHeight: 1.08,
@@ -1048,10 +1048,11 @@ export default function Portfolio() {
             fontSize: 17, color: "var(--text-secondary)", lineHeight: 1.75,
             maxWidth: 540, margin: "0 0 28px",
           }}>
-            I build high-performance web products at the intersection of frontend engineering
-            and personalization. 4+ years at BMO InvestorLine via TCS — deep roots in Angular,
-            Adobe Target, and enterprise-scale UI systems — alongside full-stack side projects
-            in AI and bilingual product design.
+            AI Product Engineer and Full-Stack Developer with 8 years of experience shipping
+            production applications for Fortune 500 financial institutions. Currently at BMO
+            InvestorLine via TCS, with deep roots in Angular, Adobe Target, and enterprise-scale
+            UI systems. Building AI-powered side projects in personalization, agentic automation,
+            and bilingual product design on the side.
           </p>
           <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
             <HeroSocialLink label="LinkedIn" href="https://www.linkedin.com/in/ashwin-ramani/" iconName="linkedin" primary />
@@ -1101,7 +1102,7 @@ export default function Portfolio() {
             <p style={{
               fontSize: 12, color: "var(--text-muted)", textTransform: "uppercase",
               letterSpacing: "0.1em", margin: "0 0 4px",
-            }}>2021 — Present · via TCS</p>
+            }}>2021 to Present · via TCS</p>
             <h2 style={{
               fontSize: 24, fontWeight: 700, margin: "0 0 2px",
               color: "var(--text-primary)", fontFamily: "'Georgia',serif", letterSpacing: "-0.02em",
@@ -1161,7 +1162,7 @@ export default function Portfolio() {
           <div className="about-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem 3rem", marginBottom: "1.75rem" }}>
             <div style={{ background: "var(--bg-subtle)", borderRadius: "var(--radius-md)", padding: "1.25rem" }}>
               <p style={{ fontSize: 11, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.08em", margin: "0 0 8px" }}>Education</p>
-              <p style={{ fontSize: 14, color: "var(--text-primary)", margin: "0 0 2px", fontWeight: 600 }}>MEng, Product Realization — GPA 3.7</p>
+              <p style={{ fontSize: 14, color: "var(--text-primary)", margin: "0 0 2px", fontWeight: 600 }}>MEng, Product Realization, GPA 3.7</p>
               <p style={{ fontSize: 13, color: "var(--text-muted)", margin: "0 0 12px" }}>Simon Fraser University</p>
               <p style={{ fontSize: 14, color: "var(--text-primary)", margin: "0 0 2px", fontWeight: 600 }}>BTech, Mechatronics</p>
               <p style={{ fontSize: 13, color: "var(--text-muted)", margin: 0 }}>SRM University</p>
@@ -1179,9 +1180,13 @@ export default function Portfolio() {
               </div>
             </div>
           </div>
-          <p style={{ fontSize: 15, color: "var(--text-secondary)", lineHeight: 1.75, maxWidth: 540 }}>
-            I think in product terms as naturally as I think in code — drawn to the overlap between
-            frontend engineering, AI integration, and product engineering.
+          <p style={{ fontSize: 15, color: "var(--text-secondary)", lineHeight: 1.75, maxWidth: 560 }}>
+            AI Product Engineer and Full-Stack Developer with 8+ years shipping production-grade
+            applications for Fortune 500 financial institutions. I specialize in building AI-powered
+            products from concept to production, combining strong frontend work in React and Angular
+            with backend Node.js, Azure cloud infrastructure, and hands-on AI engineering using
+            GPT-5.2, RAG pipelines, and agentic browser automation. Deep MarTech background in
+            Adobe Target personalization and experimentation at banking scale.
           </p>
         </section>
 
