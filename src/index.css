@@ -9,21 +9,21 @@ html {
 }
 
 :root {
-  /* Light palette */
-  --bg-base:       #FAFAF8;
+  --bg-base:       #F7F6F3;
   --bg-card:       #FFFFFF;
-  --bg-subtle:     #F5F4F0;
-  --bg-warm:       #FDF8F3;
-  --border:        #E8E6E1;
-  --border-light:  #F0EDE8;
+  --bg-subtle:     #EFEDE8;
+  --bg-warm:       #FBF7F2;
+  --bg-inset:      #E8E5DF;
+  --border:        #DDD9D2;
+  --border-light:  #EAE7E1;
   --text-primary:  #1A1917;
-  --text-secondary:#5C5955;
-  --text-muted:    #9C9894;
+  --text-secondary:#4A4744;
+  --text-muted:    #8A8480;
   --accent-blue:   #1A5CA8;
-  --accent-bg:     #EEF4FC;
-  --accent-border: #C2D9F4;
-  --shadow-sm:     0 1px 3px rgba(26,25,23,0.06), 0 1px 2px rgba(26,25,23,0.04);
-  --shadow-md:     0 4px 12px rgba(26,25,23,0.08), 0 2px 4px rgba(26,25,23,0.04);
+  --accent-bg:     #EBF3FC;
+  --accent-border: #BAD4F0;
+  --shadow-sm:     0 1px 3px rgba(26,25,23,0.07), 0 1px 2px rgba(26,25,23,0.05);
+  --shadow-md:     0 4px 16px rgba(26,25,23,0.09), 0 2px 4px rgba(26,25,23,0.05);
   --radius-sm:     6px;
   --radius-md:     10px;
   --radius-lg:     14px;

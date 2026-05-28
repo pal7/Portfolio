@@ -99,7 +99,7 @@ const BMO_GROUPS = [
         },
         contribution: "Built trading dashboard components, Redoc micro-app, multi-step reactive forms, account flows, and ongoing feature delivery across web and mobile (Angular + Capacitor).",
         stack: ["Angular 19", "Capacitor", "TypeScript", "RxJS", "Redoc", "Azure DevOps"],
-        preview: null, // "/previews/investorline.png"
+        preview: null,
       },
       {
         id: "smartfolio",
@@ -111,7 +111,7 @@ const BMO_GROUPS = [
         },
         contribution: "Led migration from legacy AngularJS to Angular 19 — rebuilt components, services, and routing to modern Angular patterns while keeping the platform live.",
         stack: ["Angular 19", "AngularJS", "TypeScript", "RxJS"],
-        preview: null, // "/previews/smartfolio.png"
+        preview: null,
       },
     ],
   },
@@ -158,7 +158,6 @@ const BMO_GROUPS = [
   },
 ];
 
-
 const WEBSITES = [
   {
     title: "Burnaby Chiropractic",
@@ -166,7 +165,8 @@ const WEBSITES = [
     year: "2020",
     type: "Client Project",
     typeColor: "teal",
-    hosting: "WordPress · ongoing maintenance",
+    hosting: "Ongoing maintenance",
+    previewNote: "Live site — visit to view",
     summary: "End-to-end design and build for a chiropractic clinic in Burnaby, BC — from initial wireframes through visual design to production. First client project. Appeared in the first 10 Google search results within 2 months of launch.",
     bullets: [
       "Owned the full product design lifecycle: user research, wireframing, visual design, and frontend build — solo",
@@ -176,7 +176,6 @@ const WEBSITES = [
       "Optimized Core Web Vitals: sub-2s LCP on mobile, zero CLS",
     ],
     stack: ["HTML5", "CSS3", "JavaScript", "Figma / Wireframing", "SEO", "Schema.org"],
-    iframeUrl: "https://www.burnabychiro.com",
   },
   {
     title: "Canada Nagarathar Sangam",
@@ -202,6 +201,22 @@ const WEBSITES = [
     iframeUrl: "https://www.canadanagaratharsangam.com",
   },
 ];
+
+// ─── SVG ICON PATHS ───────────────────────────────────────────────────────────
+
+const ICONS = {
+  linkedin: "M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z",
+  github: "M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12",
+  email: "M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z",
+};
+
+function SvgIcon({ name, size = 15 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" style={{ flexShrink: 0 }}>
+      <path d={ICONS[name]} />
+    </svg>
+  );
+}
 
 // ─── COMPONENTS ──────────────────────────────────────────────────────────────
 
@@ -262,18 +277,91 @@ function BulletList({ items, color = "#374151", size = 14 }) {
   );
 }
 
+function NavButton({ label, onClick }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <button
+      onClick={onClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        background: "none", border: "none", cursor: "pointer",
+        fontSize: 13, padding: 0, fontFamily: "inherit",
+        color: hovered ? "#ffffff" : "#9ca3af",
+        transition: "color 0.2s",
+      }}
+    >{label}</button>
+  );
+}
+
+function HeroSocialLink({ label, href, iconName, primary }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <a
+      href={href}
+      target={href.startsWith("http") ? "_blank" : undefined}
+      rel="noopener noreferrer"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        display: "flex", alignItems: "center", gap: 7,
+        fontSize: 13, textDecoration: "none",
+        padding: "7px 16px", borderRadius: "var(--radius-sm)",
+        opacity: hovered ? 0.8 : 1,
+        transition: "opacity 0.2s",
+        ...(primary
+          ? { color: "var(--accent-blue)", background: "var(--accent-bg)", border: "0.5px solid var(--accent-border)" }
+          : { color: "var(--text-secondary)", border: "0.5px solid var(--border)" }),
+      }}
+    >
+      <SvgIcon name={iconName} size={15} />
+      {label}
+    </a>
+  );
+}
+
+function FooterSocialLink({ label, href, iconName }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <a
+      href={href}
+      target={href.startsWith("http") ? "_blank" : undefined}
+      rel="noopener noreferrer"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        display: "flex", alignItems: "center", gap: 7,
+        fontSize: 13, textDecoration: "none",
+        color: hovered ? "#9ca3af" : "#ffffff",
+        transition: "color 0.2s",
+      }}
+    >
+      <SvgIcon name={iconName} size={13} />
+      {label}
+    </a>
+  );
+}
+
 // ─── FEATURED PROJECT CARD ────────────────────────────────────────────────────
 
 function FeaturedCard({ project }) {
   const [open, setOpen] = useState(false);
+  const [hovered, setHovered] = useState(false);
   const statusC = TAG_STYLE[project.statusColor] || TAG_STYLE.green;
 
   return (
-    <div style={{
-      border: "0.5px solid var(--border)", borderRadius: "var(--radius-lg)",
-      overflow: "hidden", background: "var(--bg-card)",
-      marginBottom: 16, boxShadow: "var(--shadow-sm)",
-    }}>
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        border: "0.5px solid var(--border)", borderRadius: "var(--radius-lg)",
+        overflow: "hidden", background: "var(--bg-card)",
+        marginBottom: 16,
+        transition: "all 0.2s ease",
+        boxShadow: hovered ? "var(--shadow-md)" : "var(--shadow-sm)",
+        transform: hovered ? "translateY(-1px)" : "translateY(0)",
+      }}
+    >
       {/* Header row */}
       <div
         onClick={() => setOpen(v => !v)}
@@ -602,31 +690,42 @@ function AppLinks({ links }) {
   );
 }
 
+function BMOProductCard({ p }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        border: "0.5px solid var(--border)", borderRadius: "var(--radius-md)",
+        overflow: "hidden", background: "var(--bg-subtle)",
+        transition: "all 0.2s ease",
+        boxShadow: hovered ? "var(--shadow-md)" : "var(--shadow-sm)",
+        transform: hovered ? "translateY(-1px)" : "translateY(0)",
+      }}
+    >
+      <SitePreview url={p.links.web} src={p.preview} title={p.name} />
+      <div style={{ padding: "1rem" }}>
+        <div style={{ marginBottom: 7 }}>
+          <Tag label={p.type} color={p.tagColor} small />
+        </div>
+        <h4 style={{ fontSize: 15, fontWeight: 700, margin: "0 0 5px", color: "var(--text-primary)", fontFamily: "'Georgia',serif", letterSpacing: "-0.01em" }}>{p.name}</h4>
+        <p style={{ fontSize: 12, color: "var(--text-secondary)", lineHeight: 1.65, margin: "0 0 10px" }}>{p.contribution}</p>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginBottom: 8 }}>
+          {p.stack.map(t => <Pill key={t} label={t} />)}
+        </div>
+        <AppLinks links={p.links} />
+      </div>
+    </div>
+  );
+}
+
 function BMOWealthGroup({ group }) {
   return (
     <div style={{ borderBottom: "0.5px solid var(--border)", padding: "2rem 0" }}>
       <p style={{ fontSize: 13, color: "var(--text-muted)", margin: "0 0 4px" }}>{group.description}</p>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px,1fr))", gap: 12, marginTop: 16 }}>
-        {group.products.map(p => (
-          <div key={p.id} style={{
-            border: "0.5px solid var(--border)", borderRadius: "var(--radius-md)",
-            overflow: "hidden", background: "var(--bg-subtle)",
-            boxShadow: "var(--shadow-sm)",
-          }}>
-            <SitePreview url={p.links.web} src={p.preview} title={p.name} />
-            <div style={{ padding: "1rem" }}>
-              <div style={{ marginBottom: 7 }}>
-                <Tag label={p.type} color={p.tagColor} small />
-              </div>
-              <h4 style={{ fontSize: 15, fontWeight: 700, margin: "0 0 5px", color: "var(--text-primary)", fontFamily: "'Georgia',serif", letterSpacing: "-0.01em" }}>{p.name}</h4>
-              <p style={{ fontSize: 12, color: "var(--text-secondary)", lineHeight: 1.65, margin: "0 0 10px" }}>{p.contribution}</p>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginBottom: 8 }}>
-                {p.stack.map(t => <Pill key={t} label={t} />)}
-              </div>
-              <AppLinks links={p.links} />
-            </div>
-          </div>
-        ))}
+        {group.products.map(p => <BMOProductCard key={p.id} p={p} />)}
       </div>
     </div>
   );
@@ -712,7 +811,6 @@ function BMOComplianceGroup({ group }) {
 
 function SitePreview({ url, src, title }) {
   if (!src) {
-    // Placeholder with subtle pattern until screenshot is added
     return (
       <a href={url} target="_blank" rel="noopener noreferrer" style={{ display: "block", textDecoration: "none" }}>
         <div style={{
@@ -747,8 +845,7 @@ function SitePreview({ url, src, title }) {
             </div>
           </div>
           <div style={{ marginTop: 20, textAlign: "center" }}>
-            <p style={{ fontSize: 11, color: "var(--text-muted)", margin: 0 }}>Preview coming soon</p>
-            <p style={{ fontSize: 10, color: "var(--text-muted)", margin: "3px 0 0", opacity: 0.7 }}>Visit site ↗</p>
+            <p style={{ fontSize: 13, fontWeight: 500, color: "var(--accent-blue)", margin: 0 }}>Visit live site ↗</p>
           </div>
         </div>
       </a>
@@ -791,13 +888,20 @@ function SitePreview({ url, src, title }) {
 // ─── WEBSITE CARD ─────────────────────────────────────────────────────────────
 
 function WebsiteCard({ site }) {
+  const [hovered, setHovered] = useState(false);
   return (
-    <div style={{
-      background: "var(--bg-card)", border: "0.5px solid var(--border)",
-      borderRadius: "var(--radius-lg)", overflow: "hidden",
-      display: "flex", flexDirection: "column",
-      boxShadow: "var(--shadow-sm)",
-    }}>
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        background: "var(--bg-card)", border: "0.5px solid var(--border)",
+        borderRadius: "var(--radius-lg)", overflow: "hidden",
+        display: "flex", flexDirection: "column",
+        transition: "all 0.2s ease",
+        boxShadow: hovered ? "var(--shadow-md)" : "var(--shadow-sm)",
+        transform: hovered ? "translateY(-1px)" : "translateY(0)",
+      }}
+    >
       {/* Preview */}
       <SitePreview url={site.url} src={site.preview} title={site.title} />
 
@@ -873,9 +977,9 @@ export default function Portfolio() {
       {/* NAV */}
       <nav style={{
         position: "sticky", top: 0, zIndex: 100,
-        background: "rgba(250,250,248,0.96)",
+        background: "rgba(17,17,17,0.97)",
         backdropFilter: "blur(10px)",
-        borderBottom: "0.5px solid var(--border)",
+        borderBottom: "0.5px solid rgba(255,255,255,0.08)",
         padding: "0 24px",
       }}>
         <div style={{
@@ -883,15 +987,12 @@ export default function Portfolio() {
           display: "flex", alignItems: "center", justifyContent: "space-between",
           height: 54,
         }}>
-          <span style={{ fontSize: 15, fontWeight: 700, color: "var(--text-primary)", letterSpacing: "-0.01em" }}>
+          <span style={{ fontSize: 15, fontWeight: 700, color: "#ffffff", letterSpacing: "-0.01em" }}>
             AR
           </span>
           <div className="nav-links" style={{ display: "flex", gap: 24 }}>
             {navItems.map(n => (
-              <button key={n.label} onClick={() => scrollTo(n.id)} style={{
-                background: "none", border: "none", cursor: "pointer",
-                fontSize: 13, color: "var(--text-secondary)", padding: 0, fontFamily: "inherit",
-              }}>{n.label}</button>
+              <NavButton key={n.label} label={n.label} onClick={() => scrollTo(n.id)} />
             ))}
           </div>
         </div>
@@ -921,29 +1022,15 @@ export default function Portfolio() {
             in AI and bilingual product design.
           </p>
           <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-            {[
-              ["LinkedIn ↗", "https://www.linkedin.com/in/ashwin-ramani/", true],
-              ["GitHub ↗", "https://github.com/pal7/", false],
-              ["Email", "mailto:ashwnramani@gmail.com", false],
-            ].map(([label, href, primary]) => (
-              <a key={label} href={href}
-                target={href.startsWith("http") ? "_blank" : undefined}
-                rel="noopener noreferrer"
-                style={{
-                  fontSize: 13, textDecoration: "none",
-                  padding: "7px 16px", borderRadius: "var(--radius-sm)",
-                  ...(primary
-                    ? { color: "var(--accent-blue)", background: "var(--accent-bg)", border: "0.5px solid var(--accent-border)" }
-                    : { color: "var(--text-secondary)", border: "0.5px solid var(--border)" }),
-                }}>{label}</a>
-            ))}
+            <HeroSocialLink label="LinkedIn" href="https://www.linkedin.com/in/ashwin-ramani/" iconName="linkedin" primary />
+            <HeroSocialLink label="GitHub" href="https://github.com/pal7/" iconName="github" primary={false} />
+            <HeroSocialLink label="Email" href="mailto:ashwnramani@gmail.com" iconName="email" primary={false} />
           </div>
         </section>
 
         {/* SKILLS STRIP */}
         <div style={{
           borderTop: "0.5px solid var(--border)", borderBottom: "0.5px solid var(--border)",
-          padding: "1.25rem 0",
           display: "flex", flexWrap: "wrap", gap: "10px 24px",
           background: "var(--bg-subtle)",
           borderRadius: "var(--radius-sm)",
@@ -1049,9 +1136,15 @@ export default function Portfolio() {
             </div>
             <div style={{ background: "var(--bg-subtle)", borderRadius: "var(--radius-md)", padding: "1.25rem" }}>
               <p style={{ fontSize: 11, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.08em", margin: "0 0 8px" }}>Previous</p>
-              {["Samsung", "TransLink — Python, AWS S3/Lambda, Power BI", "Cognizant — React, Java", "Zoho / WebNMS — IoT"].map(e => (
-                <p key={e} style={{ fontSize: 13, color: "var(--text-secondary)", margin: "0 0 5px" }}>{e}</p>
-              ))}
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                {["Samsung", "TransLink", "Cognizant", "Zoho / WebNMS"].map(e => (
+                  <span key={e} style={{
+                    background: "var(--bg-inset)", border: "0.5px solid var(--border)",
+                    fontSize: 12, padding: "4px 10px", borderRadius: 20,
+                    color: "var(--text-secondary)",
+                  }}>{e}</span>
+                ))}
+              </div>
             </div>
           </div>
           <p style={{ fontSize: 15, color: "var(--text-secondary)", lineHeight: 1.75, maxWidth: 540 }}>
@@ -1060,22 +1153,32 @@ export default function Portfolio() {
           </p>
         </section>
 
-        {/* FOOTER */}
-        <footer style={{
-          borderTop: "0.5px solid var(--border)", padding: "1.5rem 0",
-          display: "flex", justifyContent: "space-between", alignItems: "center",
-          flexWrap: "wrap", gap: 8, marginBottom: "1rem",
-        }}>
-          <span style={{ fontSize: 12, color: "var(--text-muted)" }}>© 2025 Ashwin Ramani</span>
-          <div style={{ display: "flex", gap: 20 }}>
-            {[["LinkedIn", "https://www.linkedin.com/in/ashwin-ramani/"], ["GitHub", "https://github.com/pal7/"], ["Email", "mailto:ashwnramani@gmail.com"]].map(([l, h]) => (
-              <a key={l} href={h} target={h.startsWith("http") ? "_blank" : undefined}
-                rel="noopener noreferrer"
-                style={{ fontSize: 12, color: "var(--text-muted)", textDecoration: "none" }}>{l}</a>
-            ))}
-          </div>
-        </footer>
       </div>
+
+      {/* FOOTER — full-width dark, outside the max-width wrapper */}
+      <footer style={{
+        background: "#111111",
+        borderTop: "0.5px solid rgba(255,255,255,0.08)",
+      }}>
+        <div style={{ maxWidth: 800, margin: "0 auto", padding: "3rem 20px" }}>
+          {/* Top row: monogram + tagline */}
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
+            <span style={{
+              fontSize: 18, fontWeight: 700, color: "#ffffff",
+              fontFamily: "'Georgia',serif", letterSpacing: "-0.01em",
+            }}>AR</span>
+            <span style={{ fontSize: 13, color: "#666666" }}>Senior Frontend Engineer · Toronto</span>
+          </div>
+          {/* Middle row: social links */}
+          <div style={{ display: "flex", justifyContent: "center", gap: 32, marginBottom: "2rem" }}>
+            <FooterSocialLink label="LinkedIn" href="https://www.linkedin.com/in/ashwin-ramani/" iconName="linkedin" />
+            <FooterSocialLink label="GitHub" href="https://github.com/pal7/" iconName="github" />
+            <FooterSocialLink label="Email" href="mailto:ashwnramani@gmail.com" iconName="email" />
+          </div>
+          {/* Bottom row: copyright */}
+          <p style={{ textAlign: "center", fontSize: 12, color: "#444444", margin: 0 }}>© 2025 Ashwin Ramani</p>
+        </div>
+      </footer>
     </div>
   );
 }
