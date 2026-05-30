@@ -82,6 +82,40 @@ const FEATURED_PROJECTS = [
 
 const BMO_GROUPS = [
   {
+    id: "personalization",
+    label: "Personalization & A/B Testing",
+    description: "End-to-end ownership of the personalization and experimentation stack across bmo.com — all lines of business — covering campaign implementation, site audits, A/B and multivariate testing, internal tooling, and live-test monitoring.",
+    stack: [
+      "Adobe Target", "A4T", "A/B Testing", "MVT", "Experience Targeting",
+      "Adobe Analytics", "Adobe Launch", "Salesforce Marketing Cloud",
+      "Angular 19", "TypeScript", "RxJS", "React", "Gatsby",
+    ],
+    summary: "Subject matter expert in Adobe Target, delivering A/B, multivariate (MVT), and experience targeting campaigns across bmo.com and all lines of business. Integrated Adobe Analytics via A4T (Analytics for Target) for campaign-level reporting and lift measurement. Conducted site audits to identify personalization opportunities and assess page readiness for targeting. Integrated Salesforce Marketing Cloud for triggered email journeys tied to in-app actions. Instrumented Adobe Analytics with a typed Angular service layer covering 100+ tracked interactions.",
+    tools: [
+      {
+        id: "pers-lib",
+        title: "pers-lib",
+        status: "Shipped · Internal",
+        summary: "Internal npm component library for the personalization team, structured after Material UI — atoms, organisms, and layout components consumed via package imports rather than copy-pasting markup across campaigns. Built in React with TypeScript, it covered buttons, modals, banners, overlays, and form elements all pre-styled to BMO brand standards. Shipped with a live-reload dev server so experience developers could compose and preview Target variants without a full rebuild cycle.",
+        stack: ["React", "TypeScript", "npm", "Webpack", "Live Reload"],
+      },
+      {
+        id: "pers-tsc-gen",
+        title: "pers-tsc-gen",
+        status: "Shipped · Internal",
+        summary: "Command-line TypeScript scaffolding tool for Adobe Target experience scripts. Engineers authored experiences in TypeScript — with full type safety, IDE autocompletion, and shared type definitions for BMO's data layer and Adobe Target's mbox and profile objects — and pers-tsc-gen compiled output to ES5-compatible JavaScript ready to deploy directly into Target's code editor. Cut campaign setup time by approximately 60% by eliminating manual boilerplate and enforcing a consistent script structure across the team.",
+        stack: ["TypeScript", "Node.js", "Babel", "Adobe Target", "ES5"],
+      },
+      {
+        id: "pct",
+        title: "PCT: Personalization Campaign Tracker",
+        status: "UI built · not shipped",
+        summary: "Internal tool to detect silently broken Adobe Target activities caused by DOM changes, ID updates, or content shifts that Adobe's dashboard doesn't surface. Built the Gatsby frontend UI, a health dashboard showing live test status (OK / warning / broken) with expandable detail per campaign, backed by a Puppeteer headless Chrome validation service.",
+        stack: ["Gatsby", "TypeScript", "Puppeteer", "REST APIs"],
+      },
+    ],
+  },
+  {
     id: "wealth",
     label: "BMO Wealth Digital",
     description: "Frontend engineering across two flagship investing platforms serving Canadian retail and self-directed investors.",
@@ -113,24 +147,6 @@ const BMO_GROUPS = [
         previewImg: "/previews/sf.png",
       },
     ],
-  },
-  {
-    id: "personalization",
-    label: "Personalization & A/B Testing",
-    description: "End-to-end ownership of the personalization and experimentation stack across bmo.com — all lines of business — covering campaign implementation, site audits, A/B and multivariate testing, internal tooling, and live-test monitoring.",
-    stack: [
-      "Adobe Target", "A4T", "A/B Testing", "MVT", "Experience Targeting",
-      "Adobe Analytics", "Adobe Launch", "Salesforce Marketing Cloud",
-      "Angular 19", "TypeScript", "RxJS", "React", "Gatsby",
-    ],
-    summary: "Subject matter expert in Adobe Target, delivering A/B, multivariate (MVT), and experience targeting campaigns across bmo.com and all lines of business. Integrated Adobe Analytics via A4T (Analytics for Target) for campaign-level reporting and lift measurement. Conducted site audits to identify personalization opportunities and assess page readiness for targeting. Built pers-tsc-gen, an internal TypeScript code generator that scaffolded Adobe Target scripts and reduced campaign setup time ~60%. Integrated Salesforce Marketing Cloud for triggered email journeys tied to in-app actions. Instrumented Adobe Analytics with a typed Angular service layer covering 100+ tracked interactions.",
-    pct: {
-      title: "PCT: Personalization Campaign Tracker",
-      summary: "Internal tool to detect silently broken Adobe Target activities caused by DOM changes, ID updates, or content shifts that Adobe's dashboard doesn't surface. Built the Gatsby frontend UI, a health dashboard showing live test status (OK / warning / broken) with expandable detail per campaign, backed by a Puppeteer headless Chrome validation service.",
-      status: "UI built · Not shipped (cloud funding not approved)",
-      stack: ["Gatsby", "TypeScript", "Puppeteer", "REST APIs"],
-      diagram: true,
-    },
   },
   {
     id: "compliance",
@@ -276,13 +292,12 @@ function BulletList({ items, color = "#374151", size = 14 }) {
   );
 }
 
-function ToggleButton({ expanded, onClick }) {
+function ToggleButton({ expanded }) {
   const [hovered, setHovered] = useState(false);
   return (
     <button
       type="button"
       title={expanded ? "Collapse" : "Expand"}
-      onClick={e => { e.stopPropagation(); onClick && onClick(); }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
@@ -404,7 +419,7 @@ function FeaturedCard({ project }) {
               textTransform: "uppercase", letterSpacing: "0.05em",
             }}>{project.status}</span>
           </div>
-          <ToggleButton expanded={open} onClick={() => setOpen(v => !v)} />
+          <ToggleButton expanded={open} />
         </div>
 
         <div>
@@ -548,92 +563,6 @@ function FeaturedCard({ project }) {
 
 // ─── PCT ARCHITECTURE DIAGRAM ────────────────────────────────────────────────
 
-function PCTDiagram() {
-  const S = { fontFamily: "system-ui, -apple-system, sans-serif" };
-  return (
-    <div style={{ margin: "20px 0 8px", overflowX: "auto" }}>
-      <p style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--text-muted)", margin: "0 0 10px" }}>
-        Proposed infrastructure (not shipped, AWS funding was not approved)
-      </p>
-      <svg viewBox="0 0 700 380" style={{ width: "100%", minWidth: 560, display: "block" }} xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-            <path d="M2 2L8 5L2 8" fill="none" stroke="#6b7280" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </marker>
-          <marker id="ad" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">
-            <path d="M2 2L8 5L2 8" fill="none" stroke="#9ca3af" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-          </marker>
-        </defs>
-        <rect x="8" y="8" width="148" height="220" rx="7" fill="#fdf2f8" stroke="#f0abfc" strokeWidth="0.75"/>
-        <text x="82" y="24" textAnchor="middle" fontSize="9" fill="#701a75" style={S} fontWeight="600" letterSpacing="0.06em">PERSONALIZATION PLATFORM</text>
-        <rect x="22" y="34" width="120" height="34" rx="5" fill="#bbf7d0" stroke="#86efac" strokeWidth="0.5"/>
-        <text x="82" y="54" textAnchor="middle" fontSize="10" fill="#14532d" style={S}>Host Campaign</text>
-        <rect x="22" y="82" width="54" height="28" rx="5" fill="#bbf7d0" stroke="#86efac" strokeWidth="0.5"/>
-        <text x="49" y="99" textAnchor="middle" fontSize="9.5" fill="#14532d" style={S}>Activity</text>
-        <text x="49" y="110" textAnchor="middle" fontSize="9" fill="#166534" style={S}>logs</text>
-        <rect x="86" y="82" width="56" height="28" rx="5" fill="#bbf7d0" stroke="#86efac" strokeWidth="0.5"/>
-        <text x="114" y="99" textAnchor="middle" fontSize="9.5" fill="#14532d" style={S}>Campaign</text>
-        <text x="114" y="110" textAnchor="middle" fontSize="9" fill="#166534" style={S}>source code</text>
-        <rect x="22" y="128" width="120" height="30" rx="5" fill="#bbf7d0" stroke="#86efac" strokeWidth="0.5"/>
-        <text x="82" y="147" textAnchor="middle" fontSize="10" fill="#14532d" style={S}>Create Activity List</text>
-        <rect x="22" y="174" width="120" height="30" rx="5" fill="#bbf7d0" stroke="#86efac" strokeWidth="0.5"/>
-        <text x="82" y="193" textAnchor="middle" fontSize="10" fill="#14532d" style={S}>Activity List</text>
-        <line x1="82" y1="68" x2="82" y2="80" stroke="#6b7280" strokeWidth="0.75" strokeDasharray="3,2" markerEnd="url(#ad)"/>
-        <line x1="82" y1="112" x2="82" y2="126" stroke="#6b7280" strokeWidth="0.75" strokeDasharray="3,2" markerEnd="url(#ad)"/>
-        <line x1="82" y1="158" x2="82" y2="172" stroke="#6b7280" strokeWidth="0.75" markerEnd="url(#a)"/>
-        <rect x="176" y="60" width="124" height="100" rx="7" fill="#f8fafc" stroke="#cbd5e1" strokeWidth="0.75"/>
-        <text x="238" y="75" textAnchor="middle" fontSize="9" fill="#475569" style={S} fontWeight="600" letterSpacing="0.06em">NETWORK PROXY</text>
-        <rect x="190" y="84" width="46" height="28" rx="5" fill="#bbf7d0" stroke="#86efac" strokeWidth="0.5"/>
-        <text x="213" y="102" textAnchor="middle" fontSize="9.5" fill="#14532d" style={S}>Gateway</text>
-        <rect x="250" y="84" width="40" height="28" rx="5" fill="#bbf7d0" stroke="#86efac" strokeWidth="0.5"/>
-        <text x="270" y="102" textAnchor="middle" fontSize="9.5" fill="#14532d" style={S}>Proxy</text>
-        <line x1="236" y1="98" x2="249" y2="98" stroke="#6b7280" strokeWidth="0.75" markerEnd="url(#a)"/>
-        <line x1="156" y1="189" x2="174" y2="100" stroke="#6b7280" strokeWidth="0.9" markerEnd="url(#a)"/>
-        <rect x="320" y="8" width="368" height="230" rx="7" fill="#eff6ff" stroke="#93c5fd" strokeWidth="0.75"/>
-        <text x="504" y="22" textAnchor="middle" fontSize="9" fill="#1e40af" style={S} fontWeight="600" letterSpacing="0.06em">CLOUD INFRASTRUCTURE</text>
-        <rect x="334" y="32" width="110" height="50" rx="5" fill="#dbeafe" stroke="#93c5fd" strokeWidth="0.5"/>
-        <text x="389" y="52" textAnchor="middle" fontSize="9.5" fill="#1e3a8a" style={S}>Container Routes</text>
-        <text x="389" y="65" textAnchor="middle" fontSize="9" fill="#1e3a8a" style={S}>&amp; Controller</text>
-        <rect x="460" y="32" width="64" height="34" rx="5" fill="#bfdbfe" stroke="#60a5fa" strokeWidth="0.75"/>
-        <text x="492" y="53" textAnchor="middle" fontSize="11" fill="#1e3a8a" style={S} fontWeight="700">PCT</text>
-        <rect x="334" y="102" width="88" height="30" rx="5" fill="#bbf7d0" stroke="#86efac" strokeWidth="0.5"/>
-        <text x="378" y="120" textAnchor="middle" fontSize="9.5" fill="#14532d" style={S}>Inhouse App</text>
-        <rect x="460" y="102" width="80" height="30" rx="5" fill="#bbf7d0" stroke="#86efac" strokeWidth="0.5"/>
-        <text x="500" y="120" textAnchor="middle" fontSize="9.5" fill="#14532d" style={S}>Puppeteer</text>
-        <rect x="334" y="158" width="90" height="30" rx="5" fill="#bbf7d0" stroke="#86efac" strokeWidth="0.5"/>
-        <text x="379" y="177" textAnchor="middle" fontSize="9.5" fill="#14532d" style={S}>Auth Service</text>
-        <rect x="444" y="158" width="90" height="30" rx="5" fill="#bbf7d0" stroke="#86efac" strokeWidth="0.5"/>
-        <text x="489" y="177" textAnchor="middle" fontSize="9.5" fill="#14532d" style={S}>API Gateway</text>
-        <line x1="444" y1="49" x2="460" y2="49" stroke="#6b7280" strokeWidth="0.75" markerEnd="url(#a)"/>
-        <line x1="389" y1="82" x2="389" y2="100" stroke="#6b7280" strokeWidth="0.75" markerEnd="url(#a)"/>
-        <line x1="492" y1="66" x2="492" y2="100" stroke="#6b7280" strokeWidth="0.75" strokeDasharray="3,2" markerEnd="url(#ad)"/>
-        <line x1="424" y1="173" x2="443" y2="173" stroke="#6b7280" strokeWidth="0.75" markerEnd="url(#a)"/>
-        <line x1="489" y1="132" x2="489" y2="156" stroke="#6b7280" strokeWidth="0.75" strokeDasharray="3,2" markerEnd="url(#ad)"/>
-        <line x1="300" y1="98" x2="332" y2="55" stroke="#6b7280" strokeWidth="0.9" markerEnd="url(#a)"/>
-        <rect x="440" y="252" width="118" height="34" rx="5" fill="#dbeafe" stroke="#93c5fd" strokeWidth="0.75"/>
-        <text x="499" y="268" textAnchor="middle" fontSize="9.5" fill="#1e40af" style={S} fontWeight="600">Direct Connect</text>
-        <text x="499" y="280" textAnchor="middle" fontSize="9" fill="#3b82f6" style={S}>Adobe SaaS ↔ BMO</text>
-        <line x1="499" y1="238" x2="499" y2="250" stroke="#6b7280" strokeWidth="0.9" markerEnd="url(#a)"/>
-        <rect x="320" y="300" width="368" height="72" rx="7" fill="#fdf2f8" stroke="#f0abfc" strokeWidth="0.75"/>
-        <text x="504" y="314" textAnchor="middle" fontSize="9" fill="#701a75" style={S} fontWeight="600" letterSpacing="0.06em">INTERNAL DELIVERY</text>
-        <rect x="334" y="322" width="60" height="28" rx="5" fill="#bbf7d0" stroke="#86efac" strokeWidth="0.5"/>
-        <text x="364" y="339" textAnchor="middle" fontSize="9.5" fill="#14532d" style={S}>API Layer</text>
-        <rect x="410" y="322" width="68" height="28" rx="5" fill="#bbf7d0" stroke="#86efac" strokeWidth="0.5"/>
-        <text x="444" y="339" textAnchor="middle" fontSize="9.5" fill="#14532d" style={S}>Dev Server</text>
-        <rect x="494" y="322" width="52" height="28" rx="5" fill="#dbeafe" stroke="#93c5fd" strokeWidth="0.5"/>
-        <text x="520" y="339" textAnchor="middle" fontSize="10" fill="#1e40af" style={S} fontWeight="600">Gatsby</text>
-        <rect x="562" y="322" width="82" height="28" rx="5" fill="#fef9c3" stroke="#fde047" strokeWidth="0.5"/>
-        <text x="603" y="335" textAnchor="middle" fontSize="9" fill="#713f12" style={S}>Personalization</text>
-        <text x="603" y="346" textAnchor="middle" fontSize="9" fill="#713f12" style={S}>Team</text>
-        <line x1="394" y1="336" x2="408" y2="336" stroke="#6b7280" strokeWidth="0.75" markerEnd="url(#a)"/>
-        <line x1="478" y1="336" x2="492" y2="336" stroke="#6b7280" strokeWidth="0.75" markerEnd="url(#a)"/>
-        <line x1="546" y1="336" x2="560" y2="336" stroke="#6b7280" strokeWidth="0.75" markerEnd="url(#a)"/>
-        <line x1="440" y1="286" x2="390" y2="320" stroke="#6b7280" strokeWidth="0.9" markerEnd="url(#a)"/>
-      </svg>
-    </div>
-  );
-}
-
 // ─── BMO GROUP COMPONENTS ─────────────────────────────────────────────────────
 
 function AppLinks({ links }) {
@@ -714,7 +643,8 @@ function BMOWealthGroup({ group }) {
 }
 
 function BMOPersGroup({ group }) {
-  const [pctOpen, setPctOpen] = useState(false);
+  const [openTools, setOpenTools] = useState({});
+  const toggle = (id) => setOpenTools(v => ({ ...v, [id]: !v[id] }));
   return (
     <div style={{ borderBottom: "0.5px solid #e5e7eb", padding: "2rem 0" }}>
       <p style={{ fontSize: 13, color: "var(--text-muted)", margin: "0 0 10px" }}>{group.description}</p>
@@ -722,34 +652,37 @@ function BMOPersGroup({ group }) {
       <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginBottom: 20 }}>
         {group.stack.map(t => <Pill key={t} label={t} />)}
       </div>
-      <div style={{
-        border: "0.5px solid var(--border)", borderRadius: "var(--radius-sm)",
-        overflow: "hidden", background: "var(--bg-subtle)",
-      }}>
-        <div onClick={() => setPctOpen(v => !v)} style={{
-          padding: "1rem 1.25rem", cursor: "pointer",
-          display: "flex", alignItems: "center", justifyContent: "space-between",
-        }}>
-          <div>
-            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
-              <Tag label="Internal Tool" color="teal" small />
-              <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "system-ui" }}>UI built · not shipped</span>
+      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+        {group.tools.map(tool => (
+          <div key={tool.id} style={{
+            border: "0.5px solid var(--border)", borderRadius: "var(--radius-sm)",
+            overflow: "hidden", background: "var(--bg-subtle)",
+          }}>
+            <div onClick={() => toggle(tool.id)} style={{
+              padding: "1rem 1.25rem", cursor: "pointer",
+              display: "flex", alignItems: "center", justifyContent: "space-between",
+            }}>
+              <div>
+                <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+                  <Tag label="Internal Tool" color="teal" small />
+                  <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "system-ui" }}>{tool.status}</span>
+                </div>
+                <h4 style={{ fontSize: 15, fontWeight: 600, margin: 0, color: "var(--text-primary)", fontFamily: "'Georgia',serif" }}>
+                  {tool.title}
+                </h4>
+              </div>
+              <ToggleButton expanded={!!openTools[tool.id]} />
             </div>
-            <h4 style={{ fontSize: 15, fontWeight: 600, margin: 0, color: "var(--text-primary)", fontFamily: "'Georgia',serif" }}>
-              PCT: Personalization Campaign Tracker
-            </h4>
+            {openTools[tool.id] && (
+              <div style={{ padding: "0 1.25rem 1.25rem", borderTop: "0.5px solid #f3f4f6" }}>
+                <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.7, margin: "12px 0 12px" }}>{tool.summary}</p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
+                  {tool.stack.map(t => <Pill key={t} label={t} />)}
+                </div>
+              </div>
+            )}
           </div>
-          <ToggleButton expanded={pctOpen} onClick={() => setPctOpen(v => !v)} />
-        </div>
-        {pctOpen && (
-          <div style={{ padding: "0 1.25rem 1.25rem", borderTop: "0.5px solid #f3f4f6" }}>
-            <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.7, margin: "12px 0 12px" }}>{group.pct.summary}</p>
-            <PCTDiagram />
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginTop: 10 }}>
-              {group.pct.stack.map(t => <Pill key={t} label={t} />)}
-            </div>
-          </div>
-        )}
+        ))}
       </div>
     </div>
   );
@@ -872,6 +805,7 @@ function WebsiteCard({ site }) {
         transition: "all 0.2s ease",
         boxShadow: hovered ? "var(--shadow-md)" : "var(--shadow-sm)",
         transform: hovered ? "translateY(-1px)" : "translateY(0)",
+        alignSelf: "start",
       }}
     >
       <SitePreview url={site.url} src={site.previewImg} title={site.title} />
@@ -882,18 +816,19 @@ function WebsiteCard({ site }) {
         style={{ padding: "1.25rem 1.25rem 1rem", cursor: "pointer" }}
       >
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 8 }}>
-          <div>
+          <div style={{ minWidth: 0, flex: 1 }}>
             <Tag label={site.type} color={site.typeColor} />
             <h3 style={{
               fontSize: 16, fontWeight: 700, margin: "7px 0 2px",
               color: "var(--text-primary)", fontFamily: "'Georgia',serif", letterSpacing: "-0.01em",
+              whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
             }}>{site.title}</h3>
-            <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
-              <span style={{ fontSize: 11, color: "var(--text-muted)" }}>{site.year}</span>
-              {site.hosting && (
-                <span style={{ fontSize: 11, color: "var(--text-muted)", opacity: 0.7 }}>· {site.hosting}</span>
-              )}
-            </div>
+            <p style={{
+              fontSize: 11, color: "var(--text-muted)", margin: "2px 0 0",
+              whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
+            }}>
+              {site.year}{site.hosting && ` · ${site.hosting}`}
+            </p>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
             <a href={site.url} target="_blank" rel="noopener noreferrer"
@@ -903,7 +838,7 @@ function WebsiteCard({ site }) {
                 border: "0.5px solid var(--accent-border)", padding: "5px 10px",
                 borderRadius: "var(--radius-sm)", background: "var(--accent-bg)", flexShrink: 0,
               }}>Visit ↗</a>
-            <ToggleButton expanded={open} onClick={() => setOpen(v => !v)} />
+            <ToggleButton expanded={open} />
           </div>
         </div>
       </div>
@@ -1069,22 +1004,23 @@ export default function Portfolio() {
             }}>BMO Financial Group</h2>
             <p style={{ fontSize: 13, color: "var(--text-muted)", margin: 0 }}>Senior Frontend Engineer</p>
           </div>
-          {BMO_GROUPS.map(group => {
-            if (group.id === "wealth") return (
-              <div key={group.id}>
-                <p style={{ fontSize: 11, fontWeight: 600, color: "var(--text-muted)", margin: "0 0 2px", textTransform: "uppercase", letterSpacing: "0.06em" }}>{group.label}</p>
-                <BMOWealthGroup group={group} />
-              </div>
-            );
+          {BMO_GROUPS.map((group, idx) => {
+            const labelMargin = idx === 0 ? "0 0 2px" : "2rem 0 2px";
             if (group.id === "personalization") return (
               <div key={group.id}>
-                <p style={{ fontSize: 11, fontWeight: 600, color: "var(--text-muted)", margin: "2rem 0 2px", textTransform: "uppercase", letterSpacing: "0.06em" }}>{group.label}</p>
+                <p style={{ fontSize: 11, fontWeight: 600, color: "var(--text-muted)", margin: labelMargin, textTransform: "uppercase", letterSpacing: "0.06em" }}>{group.label}</p>
                 <BMOPersGroup group={group} />
+              </div>
+            );
+            if (group.id === "wealth") return (
+              <div key={group.id}>
+                <p style={{ fontSize: 11, fontWeight: 600, color: "var(--text-muted)", margin: labelMargin, textTransform: "uppercase", letterSpacing: "0.06em" }}>{group.label}</p>
+                <BMOWealthGroup group={group} />
               </div>
             );
             if (group.id === "compliance") return (
               <div key={group.id}>
-                <p style={{ fontSize: 11, fontWeight: 600, color: "var(--text-muted)", margin: "2rem 0 2px", textTransform: "uppercase", letterSpacing: "0.06em" }}>{group.label}</p>
+                <p style={{ fontSize: 11, fontWeight: 600, color: "var(--text-muted)", margin: labelMargin, textTransform: "uppercase", letterSpacing: "0.06em" }}>{group.label}</p>
                 <BMOComplianceGroup group={group} />
               </div>
             );
