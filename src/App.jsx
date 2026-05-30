@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-// ─── DATA ────────────────────────────────────────────────────────────────────
+// ─── DATA ───────────────────────────────────────────────────────────────────────────────────
 
 const FEATURED_PROJECTS = [
   {
@@ -117,13 +117,13 @@ const BMO_GROUPS = [
   {
     id: "personalization",
     label: "Personalization & A/B Testing",
-    description: "End-to-end ownership of the personalization and experimentation stack for InvestorLine, covering campaign implementation, internal tooling, and live-test monitoring.",
+    description: "End-to-end ownership of the personalization and experimentation stack across bmo.com — all lines of business — covering campaign implementation, site audits, A/B and multivariate testing, internal tooling, and live-test monitoring.",
     stack: [
-      "Adobe Target", "A/B Testing", "MVT", "Experience Targeting",
+      "Adobe Target", "A4T", "A/B Testing", "MVT", "Experience Targeting",
       "Adobe Analytics", "Adobe Launch", "Salesforce Marketing Cloud",
       "Angular 19", "TypeScript", "RxJS", "React", "Gatsby",
     ],
-    summary: "Designed and delivered A/B, multivariate (MVT), and experience targeting campaigns via Adobe Target across trading dashboard and onboarding flows. Built pers-tsc-gen, an internal TypeScript code generator that scaffolded Adobe Target scripts and reduced campaign setup time ~60%. Integrated Salesforce Marketing Cloud for triggered email journeys tied to in-app actions. Instrumented Adobe Analytics with a typed Angular service layer covering 100+ tracked interactions.",
+    summary: "Subject matter expert in Adobe Target, delivering A/B, multivariate (MVT), and experience targeting campaigns across bmo.com and all lines of business. Integrated Adobe Analytics via A4T (Analytics for Target) for campaign-level reporting and lift measurement. Conducted site audits to identify personalization opportunities and assess page readiness for targeting. Built pers-tsc-gen, an internal TypeScript code generator that scaffolded Adobe Target scripts and reduced campaign setup time ~60%. Integrated Salesforce Marketing Cloud for triggered email journeys tied to in-app actions. Instrumented Adobe Analytics with a typed Angular service layer covering 100+ tracked interactions.",
     pct: {
       title: "PCT: Personalization Campaign Tracker",
       summary: "Internal tool to detect silently broken Adobe Target activities caused by DOM changes, ID updates, or content shifts that Adobe's dashboard doesn't surface. Built the Gatsby frontend UI, a health dashboard showing live test status (OK / warning / broken) with expandable detail per campaign, backed by a Puppeteer headless Chrome validation service.",
@@ -142,7 +142,7 @@ const BMO_GROUPS = [
         name: "OneTrust Cookie Consent",
         tagColor: "coral",
         type: "GDPR / CCPA compliance",
-        summary: "Implemented OneTrust SDK across InvestorLine and Smartfolio. Built consent-aware script blocking where third-party tags (analytics, marketing, functional) fire conditionally based on user consent state. Coordinated with legal to map cookie categories to OneTrust groups.",
+        summary: "Implemented OneTrust SDK across Smartfolio and InvestorLine. Built consent-aware script blocking where third-party tags (analytics, marketing, functional) fire conditionally based on user consent state. Coordinated with legal to map cookie categories to OneTrust groups.",
         stack: ["OneTrust SDK", "Angular", "TypeScript", "GDPR", "CCPA"],
       },
       {
@@ -157,9 +157,6 @@ const BMO_GROUPS = [
   },
 ];
 
-// To add previews: take a screenshot of each homepage (Cmd+Shift+4 full browser window)
-// Save to public/previews/ as burnabychiro.png and cns.png
-// Then change previewImg: null to previewImg: "/previews/burnabychiro.png" etc.
 const WEBSITES = [
   {
     title: "Burnaby Chiropractic",
@@ -279,12 +276,13 @@ function BulletList({ items, color = "#374151", size = 14 }) {
   );
 }
 
-function ToggleButton({ expanded }) {
+function ToggleButton({ expanded, onClick }) {
   const [hovered, setHovered] = useState(false);
   return (
     <button
       type="button"
       title={expanded ? "Collapse" : "Expand"}
+      onClick={e => { e.stopPropagation(); onClick && onClick(); }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
@@ -388,7 +386,6 @@ function FeaturedCard({ project }) {
         transform: hovered ? "translateY(-1px)" : "translateY(0)",
       }}
     >
-      {/* Header row */}
       <div
         onClick={() => setOpen(v => !v)}
         style={{
@@ -407,7 +404,7 @@ function FeaturedCard({ project }) {
               textTransform: "uppercase", letterSpacing: "0.05em",
             }}>{project.status}</span>
           </div>
-          <ToggleButton expanded={open} />
+          <ToggleButton expanded={open} onClick={() => setOpen(v => !v)} />
         </div>
 
         <div>
@@ -427,11 +424,8 @@ function FeaturedCard({ project }) {
         </div>
       </div>
 
-      {/* Expanded detail */}
       {open && (
         <div style={{ borderTop: "0.5px solid #f3f4f6", padding: "1.5rem 1.75rem" }}>
-
-          {/* Detail sections */}
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: "1.25rem 2rem", marginBottom: "1.5rem" }}>
             {project.detail.map(d => (
               <div key={d.heading}>
@@ -443,7 +437,6 @@ function FeaturedCard({ project }) {
             ))}
           </div>
 
-          {/* Roadmap */}
           <div style={{ borderTop: "0.5px solid #f3f4f6", paddingTop: "1.25rem", marginBottom: "1.25rem" }}>
             <p style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--text-muted)", margin: "0 0 10px" }}>
               Roadmap
@@ -465,7 +458,6 @@ function FeaturedCard({ project }) {
             </div>
           </div>
 
-          {/* iframe preview for PersAI */}
           {project.iframeUrl && (
             <div style={{ borderTop: "0.5px solid var(--border-light)", paddingTop: "1.25rem", marginBottom: "1.25rem" }}>
               <p style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--text-muted)", margin: "0 0 10px" }}>
@@ -475,7 +467,6 @@ function FeaturedCard({ project }) {
                 borderRadius: "var(--radius-md)", overflow: "hidden",
                 border: "0.5px solid var(--border)", boxShadow: "var(--shadow-md)",
               }}>
-                {/* Browser chrome */}
                 <div style={{
                   height: 30, background: "var(--border-light)",
                   borderBottom: "0.5px solid var(--border)",
@@ -528,7 +519,6 @@ function FeaturedCard({ project }) {
             </div>
           )}
 
-          {/* Links */}
           <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
             {project.url && (
               <a href={project.url} target="_blank" rel="noopener noreferrer" style={{
@@ -574,117 +564,70 @@ function PCTDiagram() {
             <path d="M2 2L8 5L2 8" fill="none" stroke="#9ca3af" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
           </marker>
         </defs>
-
-        {/* ── Zone 1: Adobe Vendor SaaS ── */}
         <rect x="8" y="8" width="148" height="220" rx="7" fill="#fdf2f8" stroke="#f0abfc" strokeWidth="0.75"/>
         <text x="82" y="24" textAnchor="middle" fontSize="9" fill="#701a75" style={S} fontWeight="600" letterSpacing="0.06em">PERSONALIZATION PLATFORM</text>
-
         <rect x="22" y="34" width="120" height="34" rx="5" fill="#bbf7d0" stroke="#86efac" strokeWidth="0.5"/>
         <text x="82" y="54" textAnchor="middle" fontSize="10" fill="#14532d" style={S}>Host Campaign</text>
-
         <rect x="22" y="82" width="54" height="28" rx="5" fill="#bbf7d0" stroke="#86efac" strokeWidth="0.5"/>
         <text x="49" y="99" textAnchor="middle" fontSize="9.5" fill="#14532d" style={S}>Activity</text>
         <text x="49" y="110" textAnchor="middle" fontSize="9" fill="#166534" style={S}>logs</text>
-
         <rect x="86" y="82" width="56" height="28" rx="5" fill="#bbf7d0" stroke="#86efac" strokeWidth="0.5"/>
         <text x="114" y="99" textAnchor="middle" fontSize="9.5" fill="#14532d" style={S}>Campaign</text>
         <text x="114" y="110" textAnchor="middle" fontSize="9" fill="#166534" style={S}>source code</text>
-
         <rect x="22" y="128" width="120" height="30" rx="5" fill="#bbf7d0" stroke="#86efac" strokeWidth="0.5"/>
         <text x="82" y="147" textAnchor="middle" fontSize="10" fill="#14532d" style={S}>Create Activity List</text>
-
         <rect x="22" y="174" width="120" height="30" rx="5" fill="#bbf7d0" stroke="#86efac" strokeWidth="0.5"/>
         <text x="82" y="193" textAnchor="middle" fontSize="10" fill="#14532d" style={S}>Activity List</text>
-
-        {/* arrows within adobe zone */}
         <line x1="82" y1="68" x2="82" y2="80" stroke="#6b7280" strokeWidth="0.75" strokeDasharray="3,2" markerEnd="url(#ad)"/>
         <line x1="82" y1="112" x2="82" y2="126" stroke="#6b7280" strokeWidth="0.75" strokeDasharray="3,2" markerEnd="url(#ad)"/>
         <line x1="82" y1="158" x2="82" y2="172" stroke="#6b7280" strokeWidth="0.75" markerEnd="url(#a)"/>
-
-        {/* ── Zone 2: Network Account ── */}
         <rect x="176" y="60" width="124" height="100" rx="7" fill="#f8fafc" stroke="#cbd5e1" strokeWidth="0.75"/>
         <text x="238" y="75" textAnchor="middle" fontSize="9" fill="#475569" style={S} fontWeight="600" letterSpacing="0.06em">NETWORK PROXY</text>
-
         <rect x="190" y="84" width="46" height="28" rx="5" fill="#bbf7d0" stroke="#86efac" strokeWidth="0.5"/>
         <text x="213" y="102" textAnchor="middle" fontSize="9.5" fill="#14532d" style={S}>Gateway</text>
-
         <rect x="250" y="84" width="40" height="28" rx="5" fill="#bbf7d0" stroke="#86efac" strokeWidth="0.5"/>
         <text x="270" y="102" textAnchor="middle" fontSize="9.5" fill="#14532d" style={S}>Proxy</text>
-
         <line x1="236" y1="98" x2="249" y2="98" stroke="#6b7280" strokeWidth="0.75" markerEnd="url(#a)"/>
-
-        {/* adobe → network */}
         <line x1="156" y1="189" x2="174" y2="100" stroke="#6b7280" strokeWidth="0.9" markerEnd="url(#a)"/>
-
-        {/* ── Zone 3: BMO Cloud AWS ── */}
         <rect x="320" y="8" width="368" height="230" rx="7" fill="#eff6ff" stroke="#93c5fd" strokeWidth="0.75"/>
         <text x="504" y="22" textAnchor="middle" fontSize="9" fill="#1e40af" style={S} fontWeight="600" letterSpacing="0.06em">CLOUD INFRASTRUCTURE</text>
-
-        {/* Fargate */}
         <rect x="334" y="32" width="110" height="50" rx="5" fill="#dbeafe" stroke="#93c5fd" strokeWidth="0.5"/>
         <text x="389" y="52" textAnchor="middle" fontSize="9.5" fill="#1e3a8a" style={S}>Container Routes</text>
         <text x="389" y="65" textAnchor="middle" fontSize="9" fill="#1e3a8a" style={S}>&amp; Controller</text>
-
-        {/* PCT */}
         <rect x="460" y="32" width="64" height="34" rx="5" fill="#bfdbfe" stroke="#60a5fa" strokeWidth="0.75"/>
         <text x="492" y="53" textAnchor="middle" fontSize="11" fill="#1e3a8a" style={S} fontWeight="700">PCT</text>
-
-        {/* Inhouse App */}
         <rect x="334" y="102" width="88" height="30" rx="5" fill="#bbf7d0" stroke="#86efac" strokeWidth="0.5"/>
         <text x="378" y="120" textAnchor="middle" fontSize="9.5" fill="#14532d" style={S}>Inhouse App</text>
-
-        {/* Puppeteer */}
         <rect x="460" y="102" width="80" height="30" rx="5" fill="#bbf7d0" stroke="#86efac" strokeWidth="0.5"/>
         <text x="500" y="120" textAnchor="middle" fontSize="9.5" fill="#14532d" style={S}>Puppeteer</text>
-
-        {/* Lambda */}
         <rect x="334" y="158" width="90" height="30" rx="5" fill="#bbf7d0" stroke="#86efac" strokeWidth="0.5"/>
         <text x="379" y="177" textAnchor="middle" fontSize="9.5" fill="#14532d" style={S}>Auth Service</text>
-
-        {/* API Gateway */}
         <rect x="444" y="158" width="90" height="30" rx="5" fill="#bbf7d0" stroke="#86efac" strokeWidth="0.5"/>
         <text x="489" y="177" textAnchor="middle" fontSize="9.5" fill="#14532d" style={S}>API Gateway</text>
-
-        {/* arrows in AWS */}
         <line x1="444" y1="49" x2="460" y2="49" stroke="#6b7280" strokeWidth="0.75" markerEnd="url(#a)"/>
         <line x1="389" y1="82" x2="389" y2="100" stroke="#6b7280" strokeWidth="0.75" markerEnd="url(#a)"/>
         <line x1="492" y1="66" x2="492" y2="100" stroke="#6b7280" strokeWidth="0.75" strokeDasharray="3,2" markerEnd="url(#ad)"/>
         <line x1="424" y1="173" x2="443" y2="173" stroke="#6b7280" strokeWidth="0.75" markerEnd="url(#a)"/>
         <line x1="489" y1="132" x2="489" y2="156" stroke="#6b7280" strokeWidth="0.75" strokeDasharray="3,2" markerEnd="url(#ad)"/>
-
-        {/* network → fargate */}
         <line x1="300" y1="98" x2="332" y2="55" stroke="#6b7280" strokeWidth="0.9" markerEnd="url(#a)"/>
-
-        {/* ── Direct Connect ── */}
         <rect x="440" y="252" width="118" height="34" rx="5" fill="#dbeafe" stroke="#93c5fd" strokeWidth="0.75"/>
         <text x="499" y="268" textAnchor="middle" fontSize="9.5" fill="#1e40af" style={S} fontWeight="600">Direct Connect</text>
         <text x="499" y="280" textAnchor="middle" fontSize="9" fill="#3b82f6" style={S}>Adobe SaaS ↔ BMO</text>
-
-        {/* AWS → Direct Connect */}
         <line x1="499" y1="238" x2="499" y2="250" stroke="#6b7280" strokeWidth="0.9" markerEnd="url(#a)"/>
-
-        {/* ── Zone 4: BMO On-Prem ── */}
         <rect x="320" y="300" width="368" height="72" rx="7" fill="#fdf2f8" stroke="#f0abfc" strokeWidth="0.75"/>
         <text x="504" y="314" textAnchor="middle" fontSize="9" fill="#701a75" style={S} fontWeight="600" letterSpacing="0.06em">INTERNAL DELIVERY</text>
-
         <rect x="334" y="322" width="60" height="28" rx="5" fill="#bbf7d0" stroke="#86efac" strokeWidth="0.5"/>
         <text x="364" y="339" textAnchor="middle" fontSize="9.5" fill="#14532d" style={S}>API Layer</text>
-
         <rect x="410" y="322" width="68" height="28" rx="5" fill="#bbf7d0" stroke="#86efac" strokeWidth="0.5"/>
         <text x="444" y="339" textAnchor="middle" fontSize="9.5" fill="#14532d" style={S}>Dev Server</text>
-
         <rect x="494" y="322" width="52" height="28" rx="5" fill="#dbeafe" stroke="#93c5fd" strokeWidth="0.5"/>
         <text x="520" y="339" textAnchor="middle" fontSize="10" fill="#1e40af" style={S} fontWeight="600">Gatsby</text>
-
         <rect x="562" y="322" width="82" height="28" rx="5" fill="#fef9c3" stroke="#fde047" strokeWidth="0.5"/>
         <text x="603" y="335" textAnchor="middle" fontSize="9" fill="#713f12" style={S}>Personalization</text>
         <text x="603" y="346" textAnchor="middle" fontSize="9" fill="#713f12" style={S}>Team</text>
-
         <line x1="394" y1="336" x2="408" y2="336" stroke="#6b7280" strokeWidth="0.75" markerEnd="url(#a)"/>
         <line x1="478" y1="336" x2="492" y2="336" stroke="#6b7280" strokeWidth="0.75" markerEnd="url(#a)"/>
         <line x1="546" y1="336" x2="560" y2="336" stroke="#6b7280" strokeWidth="0.75" markerEnd="url(#a)"/>
-
-        {/* Direct Connect → On-Prem */}
         <line x1="440" y1="286" x2="390" y2="320" stroke="#6b7280" strokeWidth="0.9" markerEnd="url(#a)"/>
       </svg>
     </div>
@@ -779,8 +722,6 @@ function BMOPersGroup({ group }) {
       <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginBottom: 20 }}>
         {group.stack.map(t => <Pill key={t} label={t} />)}
       </div>
-
-      {/* PCT sub-section */}
       <div style={{
         border: "0.5px solid var(--border)", borderRadius: "var(--radius-sm)",
         overflow: "hidden", background: "var(--bg-subtle)",
@@ -798,7 +739,7 @@ function BMOPersGroup({ group }) {
               PCT: Personalization Campaign Tracker
             </h4>
           </div>
-          <ToggleButton expanded={pctOpen} />
+          <ToggleButton expanded={pctOpen} onClick={() => setPctOpen(v => !v)} />
         </div>
         {pctOpen && (
           <div style={{ padding: "0 1.25rem 1.25rem", borderTop: "0.5px solid #f3f4f6" }}>
@@ -856,7 +797,6 @@ function SitePreview({ url, src, title }) {
           transition: "background 0.15s",
           position: "relative", overflow: "hidden",
         }}>
-          {/* Browser chrome bar */}
           <div style={{
             position: "absolute", top: 0, left: 0, right: 0,
             height: 28, background: "var(--border-light)",
@@ -891,7 +831,6 @@ function SitePreview({ url, src, title }) {
         border: "0.5px solid var(--border)",
         overflow: "hidden", boxShadow: "var(--shadow-md)",
       }}>
-        {/* Browser chrome */}
         <div style={{
           height: 28, background: "var(--border-light)",
           borderBottom: "0.5px solid var(--border)",
@@ -921,6 +860,7 @@ function SitePreview({ url, src, title }) {
 
 function WebsiteCard({ site }) {
   const [hovered, setHovered] = useState(false);
+  const [open, setOpen] = useState(false);
   return (
     <div
       onMouseEnter={() => setHovered(true)}
@@ -934,11 +874,13 @@ function WebsiteCard({ site }) {
         transform: hovered ? "translateY(-1px)" : "translateY(0)",
       }}
     >
-      {/* Preview */}
       <SitePreview url={site.url} src={site.previewImg} title={site.title} />
 
-      {/* Content */}
-      <div style={{ padding: "1.25rem", display: "flex", flexDirection: "column", gap: 10, flex: 1 }}>
+      {/* Header — always visible, clickable to expand */}
+      <div
+        onClick={() => setOpen(v => !v)}
+        style={{ padding: "1.25rem 1.25rem 1rem", cursor: "pointer" }}
+      >
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 8 }}>
           <div>
             <Tag label={site.type} color={site.typeColor} />
@@ -953,38 +895,51 @@ function WebsiteCard({ site }) {
               )}
             </div>
           </div>
-          <a href={site.url} target="_blank" rel="noopener noreferrer" style={{
-            fontSize: 11, color: "var(--accent-blue)", textDecoration: "none",
-            border: "0.5px solid var(--accent-border)", padding: "5px 10px",
-            borderRadius: "var(--radius-sm)", background: "var(--accent-bg)", flexShrink: 0,
-          }}>Visit ↗</a>
-        </div>
-
-        <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.65, margin: 0 }}>{site.summary}</p>
-        <BulletList items={site.bullets} color="var(--text-secondary)" size={12} />
-
-        {/* Roadmap for CNS */}
-        {site.roadmap && (
-          <div style={{
-            background: "var(--bg-subtle)", borderRadius: "var(--radius-sm)",
-            padding: "10px 12px", marginTop: 2,
-          }}>
-            <p style={{ fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--text-muted)", margin: "0 0 7px" }}>
-              Phase 2 Roadmap
-            </p>
-            {site.roadmap.map((r, i) => (
-              <div key={i} style={{ display: "flex", gap: 7, marginBottom: 5, alignItems: "flex-start" }}>
-                <span style={{ fontSize: 9, color: "var(--text-muted)", marginTop: 3, flexShrink: 0 }}>◦</span>
-                <span style={{ fontSize: 12, color: "var(--text-secondary)", lineHeight: 1.5 }}>{r}</span>
-              </div>
-            ))}
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <a href={site.url} target="_blank" rel="noopener noreferrer"
+              onClick={e => e.stopPropagation()}
+              style={{
+                fontSize: 11, color: "var(--accent-blue)", textDecoration: "none",
+                border: "0.5px solid var(--accent-border)", padding: "5px 10px",
+                borderRadius: "var(--radius-sm)", background: "var(--accent-bg)", flexShrink: 0,
+              }}>Visit ↗</a>
+            <ToggleButton expanded={open} onClick={() => setOpen(v => !v)} />
           </div>
-        )}
-
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginTop: 2 }}>
-          {site.stack.map(t => <Pill key={t} label={t} />)}
         </div>
       </div>
+
+      {/* Expandable detail */}
+      {open && (
+        <div style={{
+          padding: "1rem 1.25rem 1.25rem",
+          borderTop: "0.5px solid var(--border-light)",
+          display: "flex", flexDirection: "column", gap: 10,
+        }}>
+          <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.65, margin: 0 }}>{site.summary}</p>
+          <BulletList items={site.bullets} color="var(--text-secondary)" size={12} />
+
+          {site.roadmap && (
+            <div style={{
+              background: "var(--bg-subtle)", borderRadius: "var(--radius-sm)",
+              padding: "10px 12px", marginTop: 2,
+            }}>
+              <p style={{ fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.08em", color: "var(--text-muted)", margin: "0 0 7px" }}>
+                Phase 2 Roadmap
+              </p>
+              {site.roadmap.map((r, i) => (
+                <div key={i} style={{ display: "flex", gap: 7, marginBottom: 5, alignItems: "flex-start" }}>
+                  <span style={{ fontSize: 9, color: "var(--text-muted)", marginTop: 3, flexShrink: 0 }}>◦</span>
+                  <span style={{ fontSize: 12, color: "var(--text-secondary)", lineHeight: 1.5 }}>{r}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginTop: 2 }}>
+            {site.stack.map(t => <Pill key={t} label={t} />)}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -1037,13 +992,18 @@ export default function Portfolio() {
           <p style={{
             fontSize: 12, color: "var(--text-muted)", textTransform: "uppercase",
             letterSpacing: "0.1em", margin: "0 0 14px",
-          }}>Frontend-Focused Full-Stack Developer · Toronto, CA</p>
+          }}>Frontend-Focused Full-Stack Developer · Adobe Target Engineer · Toronto, CA</p>
           <h1 style={{
             fontSize: "clamp(34px,6vw,52px)", fontWeight: 700,
-            margin: "0 0 18px", lineHeight: 1.08,
+            margin: "0 0 18px", lineHeight: 1.15,
             letterSpacing: "-0.03em", color: "var(--text-primary)",
             fontFamily: "'Georgia',serif",
-          }}>Ashwin Ramani</h1>
+          }}>
+            Ashwin{" "}
+            <span style={{ color: "#9ca3af" }}>Palaniappan</span>
+            <br />
+            Ramani
+          </h1>
           <p style={{
             fontSize: 17, color: "var(--text-secondary)", lineHeight: 1.75,
             maxWidth: 540, margin: "0 0 28px",
@@ -1070,7 +1030,7 @@ export default function Portfolio() {
           padding: "1rem 1.25rem",
           marginBottom: "0.5rem",
         }}>
-          {["Angular 19", "React", "TypeScript", "RxJS", "Adobe Target", "Adobe Analytics", "OneTrust", "Azure DevOps", "Docker", "Capacitor", "WCAG 2.1 AA", "SFMC"].map(s => (
+          {["Angular 19", "React", "TypeScript", "RxJS", "Adobe Target", "AT.js", "VEC", "Form-Based Composer", "Profile Scripts", "Adobe Launch", "A4T", "Adobe Analytics", "Audience Segmentation", "OneTrust", "SFMC", "Azure DevOps", "Docker", "Capacitor", "WCAG 2.1 AA"].map(s => (
             <span key={s} style={{ fontSize: 12, color: "var(--text-muted)", whiteSpace: "nowrap" }}>{s}</span>
           ))}
         </div>
@@ -1192,13 +1152,12 @@ export default function Portfolio() {
 
       </div>
 
-      {/* FOOTER — full-width dark, outside the max-width wrapper */}
+      {/* FOOTER */}
       <footer style={{
         background: "#111111",
         borderTop: "0.5px solid rgba(255,255,255,0.08)",
       }}>
         <div style={{ maxWidth: 800, margin: "0 auto", padding: "3rem 20px" }}>
-          {/* Top row: monogram + tagline */}
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
             <span style={{
               fontSize: 18, fontWeight: 700, color: "#ffffff",
@@ -1206,13 +1165,11 @@ export default function Portfolio() {
             }}>AR</span>
             <span style={{ fontSize: 13, color: "#666666" }}>Frontend Product Engineer · Toronto</span>
           </div>
-          {/* Middle row: social links */}
           <div style={{ display: "flex", justifyContent: "center", gap: 32, marginBottom: "2rem" }}>
             <FooterSocialLink label="LinkedIn" href="https://www.linkedin.com/in/ashwin-ramani/" iconName="linkedin" />
             <FooterSocialLink label="GitHub" href="https://github.com/pal7/" iconName="github" />
             <FooterSocialLink label="Email" href="mailto:ashwnramani@gmail.com" iconName="email" />
           </div>
-          {/* Bottom row: copyright */}
           <p style={{ textAlign: "center", fontSize: 12, color: "#444444", margin: 0 }}>© 2025 Ashwin Ramani</p>
         </div>
       </footer>
