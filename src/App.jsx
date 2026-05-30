@@ -85,13 +85,13 @@ const BMO_GROUPS = [
     id: "personalization",
     label: "Personalization & A/B Testing",
     role: "Adobe Target Engineer",
-    description: "End-to-end ownership of the personalization and experimentation stack across bmo.com, covering all lines of business: campaign implementation, site audits, A/B and multivariate testing, internal tooling, and live-test monitoring.",
+    description: "Owned the personalization and experimentation stack across bmo.com for all lines of business: A/B and multivariate testing, experience targeting, campaign implementation, audience segmentation, and internal tooling.",
     stack: [
       "Adobe Target", "A4T", "A/B Testing", "MVT", "Experience Targeting",
       "Adobe Analytics", "Adobe Launch", "Salesforce Marketing Cloud",
       "Angular 19", "TypeScript", "RxJS", "React", "Gatsby",
     ],
-    summary: "Ran A/B, multivariate (MVT), and experience targeting campaigns across bmo.com for all lines of business. Set up Adobe Analytics via A4T for campaign reporting and lift measurement. Audited pages to identify personalization opportunities and flag targeting readiness. Connected Salesforce Marketing Cloud for triggered email journeys tied to in-app actions. Built a typed Angular service layer for Adobe Analytics covering 100+ tracked interactions.",
+    summary: "Designed and ran A/B, multivariate, and experience targeting campaigns on BMO retail banking pages, contributing to a 15% CTR uplift and 20% conversion improvement on high-traffic consumer journeys. Implemented Target activities using AT.js via VEC and Form-Based Composer across landing pages, CTAs, and form flows. Used Adobe Target APIs for real-time visibility into active campaigns and Adobe Launch to configure tag rules and activation triggers without full engineering deployments. Worked with analytics teams on A4T to measure campaign performance and share insights with stakeholders. Developed profile scripts and custom audience segments based on visitor behaviour, visit frequency, and session attributes. Did a POC on Salesforce Marketing Cloud to compare it against Adobe Target for our business, and used Salesforce MCP to run select campaigns.",
     tools: [
       {
         id: "pers-lib",
