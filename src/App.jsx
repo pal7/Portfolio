@@ -19,7 +19,7 @@ const FEATURED_PROJECTS = [
     detail: [
       {
         heading: "How it works",
-        body: "A 7-step Playwright agent navigates the URL, captures runtime signals, takes above-fold/mid-page/post-CTA screenshots, detects the tech stack across 58+ tools in 14 categories, and synthesises everything into a structured analysis payload. Screenshots are stored in Azure Blob Storage and returned as public URLs rendered in the UI with vision-analysis captions.",
+        body: "A 7-step Playwright agent navigates the URL, captures runtime signals, takes above-fold/mid-page/post-CTA screenshots, detects the tech stack across 58+ tools in 14 categories, and synthesizes everything into a structured analysis payload. Screenshots are stored in Azure Blob Storage and returned as public URLs rendered in the UI with vision-analysis captions.",
       },
       {
         heading: "AI layer",
@@ -84,26 +84,27 @@ const BMO_GROUPS = [
   {
     id: "personalization",
     label: "Personalization & A/B Testing",
-    description: "End-to-end ownership of the personalization and experimentation stack across bmo.com — all lines of business — covering campaign implementation, site audits, A/B and multivariate testing, internal tooling, and live-test monitoring.",
+    role: "Adobe Target Engineer",
+    description: "End-to-end ownership of the personalization and experimentation stack across bmo.com, covering all lines of business: campaign implementation, site audits, A/B and multivariate testing, internal tooling, and live-test monitoring.",
     stack: [
       "Adobe Target", "A4T", "A/B Testing", "MVT", "Experience Targeting",
       "Adobe Analytics", "Adobe Launch", "Salesforce Marketing Cloud",
       "Angular 19", "TypeScript", "RxJS", "React", "Gatsby",
     ],
-    summary: "Subject matter expert in Adobe Target, delivering A/B, multivariate (MVT), and experience targeting campaigns across bmo.com and all lines of business. Integrated Adobe Analytics via A4T (Analytics for Target) for campaign-level reporting and lift measurement. Conducted site audits to identify personalization opportunities and assess page readiness for targeting. Integrated Salesforce Marketing Cloud for triggered email journeys tied to in-app actions. Instrumented Adobe Analytics with a typed Angular service layer covering 100+ tracked interactions.",
+    summary: "Ran A/B, multivariate (MVT), and experience targeting campaigns across bmo.com for all lines of business. Set up Adobe Analytics via A4T for campaign reporting and lift measurement. Audited pages to identify personalization opportunities and flag targeting readiness. Connected Salesforce Marketing Cloud for triggered email journeys tied to in-app actions. Built a typed Angular service layer for Adobe Analytics covering 100+ tracked interactions.",
     tools: [
       {
         id: "pers-lib",
         title: "pers-lib",
         status: "Shipped · Internal",
-        summary: "Internal npm component library for the personalization team, structured after Material UI — atoms, organisms, and layout components consumed via package imports rather than copy-pasting markup across campaigns. Built in React with TypeScript, it covered buttons, modals, banners, overlays, and form elements all pre-styled to BMO brand standards. Shipped with a live-reload dev server so experience developers could compose and preview Target variants without a full rebuild cycle.",
+        summary: "Internal npm component library for the personalization team, structured after Material UI: atoms, organisms, and layout components consumed via package imports rather than copy-pasting markup across campaigns. Built in React with TypeScript, it covered buttons, modals, banners, overlays, and form elements all pre-styled to BMO brand standards. Shipped with a live-reload dev server so experience developers could compose and preview Target variants without a full rebuild cycle.",
         stack: ["React", "TypeScript", "npm", "Webpack", "Live Reload"],
       },
       {
         id: "pers-tsc-gen",
         title: "pers-tsc-gen",
         status: "Shipped · Internal",
-        summary: "Command-line TypeScript scaffolding tool for Adobe Target experience scripts. Engineers authored experiences in TypeScript — with full type safety, IDE autocompletion, and shared type definitions for BMO's data layer and Adobe Target's mbox and profile objects — and pers-tsc-gen compiled output to ES5-compatible JavaScript ready to deploy directly into Target's code editor. Cut campaign setup time by approximately 60% by eliminating manual boilerplate and enforcing a consistent script structure across the team.",
+        summary: "Command-line TypeScript scaffolding tool for Adobe Target experience scripts. Engineers authored experiences in TypeScript with full type safety, IDE autocompletion, and shared type definitions for BMO's data layer and Adobe Target's mbox and profile objects. The CLI then compiled output to ES5-compatible JavaScript ready to deploy directly into Target's code editor. Cut campaign setup time by approximately 60% by eliminating manual boilerplate and enforcing a consistent script structure across the team.",
         stack: ["TypeScript", "Node.js", "Babel", "Adobe Target", "ES5"],
       },
       {
@@ -118,11 +119,12 @@ const BMO_GROUPS = [
   {
     id: "wealth",
     label: "BMO Wealth Digital",
+    role: "Senior Frontend Engineer",
     description: "Frontend engineering across two flagship investing platforms serving Canadian retail and self-directed investors.",
     products: [
       {
         id: "investorline",
-        name: "BMO InvestorLine",
+        name: "InvestorLine",
         type: "Self-directed investing platform",
         tagColor: "blue",
         links: {
@@ -136,7 +138,7 @@ const BMO_GROUPS = [
       },
       {
         id: "smartfolio",
-        name: "BMO Smartfolio",
+        name: "Smartfolio",
         type: "Robo-advisory / guided investing platform",
         tagColor: "green",
         links: {
@@ -147,19 +149,14 @@ const BMO_GROUPS = [
         previewImg: "/previews/sf.png",
       },
     ],
-  },
-  {
-    id: "compliance",
-    label: "Compliance & Security",
-    description: "Privacy, consent, and security implementations across InvestorLine and Smartfolio.",
-    items: [
+    integrations: [
       {
         id: "onetrust",
         name: "OneTrust Cookie Consent",
         tagColor: "coral",
         type: "GDPR / CCPA compliance",
-        summary: "Implemented OneTrust SDK across Smartfolio and InvestorLine. Built consent-aware script blocking where third-party tags (analytics, marketing, functional) fire conditionally based on user consent state. Coordinated with legal to map cookie categories to OneTrust groups.",
-        stack: ["OneTrust SDK", "Angular", "TypeScript", "GDPR", "CCPA"],
+        summary: "Built the consent blocking layer for InvestorLine: JavaScript that runs across all pages, intercepts third-party tags, and gates analytics, marketing, and functional scripts against the user's active consent groups. Wired OneTrust SDK (otSDK) accept/reject flows so consent state changes propagate correctly, re-fire the appropriate beacons, and trigger the right Adobe Launch rules without a page reload.",
+        stack: ["OneTrust SDK", "Angular", "TypeScript", "Adobe Launch", "GDPR", "CCPA"],
       },
       {
         id: "phishlabs",
@@ -182,9 +179,9 @@ const WEBSITES = [
     typeColor: "teal",
     hosting: "Wireframe · Design · Full build · Maintenance",
     previewImg: "/previews/burnabychiro.png",
-    summary: "End-to-end design and build for a chiropractic clinic in Burnaby, BC, from initial wireframes through visual design to production. First client project. Appeared in the first 10 Google search results within 2 months of launch.",
+    summary: "Full design and build for a chiropractic clinic in Burnaby, BC, from wireframes through production. First client project. Ranked in Google's top 10 results within 2 months of launch.",
     bullets: [
-      "Owned the full product design lifecycle: user research, wireframing, visual design, and frontend build, all working solo",
+      "Handled everything solo: user research, wireframing, visual design, and the full frontend build",
       "Designed for local conversion with clear CTAs, trust signals, and a contact flow optimized for appointment bookings",
       "Achieved first-page Google ranking within 2 months via semantic HTML5, schema.org local business markup, and on-page SEO",
       "Custom reviews and treatments sliders in vanilla JS, modular and framework-free, built for easy client handoff",
@@ -344,11 +341,10 @@ function HeroSocialLink({ label, href, iconName, primary }) {
         display: "flex", alignItems: "center", gap: 7,
         fontSize: 13, textDecoration: "none",
         padding: "7px 16px", borderRadius: "var(--radius-sm)",
-        opacity: hovered ? 0.8 : 1,
-        transition: "opacity 0.2s",
+        transition: "all 0.2s",
         ...(primary
-          ? { color: "var(--accent-blue)", background: "var(--accent-bg)", border: "0.5px solid var(--accent-border)" }
-          : { color: "var(--text-secondary)", border: "0.5px solid var(--border)" }),
+          ? { color: "var(--accent-blue)", background: hovered ? "#dbeeff" : "var(--accent-bg)", border: "0.5px solid var(--accent-border)" }
+          : { color: hovered ? "var(--accent-blue)" : "var(--text-secondary)", background: hovered ? "var(--accent-bg)" : "transparent", border: hovered ? "0.5px solid var(--accent-border)" : "0.5px solid var(--border)" }),
       }}
     >
       <SvgIcon name={iconName} size={15} />
@@ -638,6 +634,69 @@ function BMOWealthGroup({ group }) {
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px,1fr))", gap: 12, marginTop: 16 }}>
         {group.products.map(p => <BMOProductCard key={p.id} p={p} />)}
       </div>
+      {group.integrations?.length > 0 && (
+        <div style={{ marginTop: 20 }}>
+          <p style={{ fontSize: 11, fontWeight: 600, color: "var(--text-muted)", margin: "0 0 10px", textTransform: "uppercase", letterSpacing: "0.06em" }}>Platform integrations</p>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px,1fr))", gap: 12 }}>
+            {group.integrations.map(item => (
+              <div key={item.id} style={{
+                border: "0.5px solid var(--border)", borderRadius: "var(--radius-md)",
+                padding: "1.25rem", background: "var(--bg-subtle)",
+              }}>
+                <div style={{ marginBottom: 8 }}>
+                  <Tag label={item.type} color={item.tagColor} small />
+                </div>
+                <h4 style={{ fontSize: 15, fontWeight: 700, margin: "0 0 6px", color: "var(--text-primary)", fontFamily: "'Georgia',serif" }}>{item.name}</h4>
+                <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.65, margin: "0 0 10px" }}>{item.summary}</p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
+                  {item.stack.map(t => <Pill key={t} label={t} />)}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function BMOToolCard({ tool, open, onToggle }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        border: "0.5px solid var(--border)", borderRadius: "var(--radius-sm)",
+        overflow: "hidden", background: "var(--bg-subtle)",
+        transition: "all 0.2s ease",
+        boxShadow: hovered ? "var(--shadow-md)" : "var(--shadow-sm)",
+        transform: hovered ? "translateY(-1px)" : "translateY(0)",
+      }}
+    >
+      <div onClick={onToggle} style={{
+        padding: "1rem 1.25rem", cursor: "pointer",
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+      }}>
+        <div>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+            <Tag label="Internal Tool" color="teal" small />
+            <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "system-ui" }}>{tool.status}</span>
+          </div>
+          <h4 style={{ fontSize: 15, fontWeight: 600, margin: 0, color: "var(--text-primary)", fontFamily: "'Georgia',serif" }}>
+            {tool.title}
+          </h4>
+        </div>
+        <ToggleButton expanded={open} />
+      </div>
+      {open && (
+        <div style={{ padding: "0 1.25rem 1.25rem", borderTop: "0.5px solid #f3f4f6" }}>
+          <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.7, margin: "12px 0 12px" }}>{tool.summary}</p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
+            {tool.stack.map(t => <Pill key={t} label={t} />)}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -654,34 +713,7 @@ function BMOPersGroup({ group }) {
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
         {group.tools.map(tool => (
-          <div key={tool.id} style={{
-            border: "0.5px solid var(--border)", borderRadius: "var(--radius-sm)",
-            overflow: "hidden", background: "var(--bg-subtle)",
-          }}>
-            <div onClick={() => toggle(tool.id)} style={{
-              padding: "1rem 1.25rem", cursor: "pointer",
-              display: "flex", alignItems: "center", justifyContent: "space-between",
-            }}>
-              <div>
-                <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
-                  <Tag label="Internal Tool" color="teal" small />
-                  <span style={{ fontSize: 10, color: "var(--text-muted)", fontFamily: "system-ui" }}>{tool.status}</span>
-                </div>
-                <h4 style={{ fontSize: 15, fontWeight: 600, margin: 0, color: "var(--text-primary)", fontFamily: "'Georgia',serif" }}>
-                  {tool.title}
-                </h4>
-              </div>
-              <ToggleButton expanded={!!openTools[tool.id]} />
-            </div>
-            {openTools[tool.id] && (
-              <div style={{ padding: "0 1.25rem 1.25rem", borderTop: "0.5px solid #f3f4f6" }}>
-                <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.7, margin: "12px 0 12px" }}>{tool.summary}</p>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
-                  {tool.stack.map(t => <Pill key={t} label={t} />)}
-                </div>
-              </div>
-            )}
-          </div>
+          <BMOToolCard key={tool.id} tool={tool} open={!!openTools[tool.id]} onToggle={() => toggle(tool.id)} />
         ))}
       </div>
     </div>
@@ -715,6 +747,13 @@ function BMOComplianceGroup({ group }) {
 
 // ─── SITE PREVIEW ─────────────────────────────────────────────────────────────
 
+const apexDomain = url => {
+  try {
+    const parts = new URL(url).hostname.split('.');
+    return parts.length > 2 ? parts.slice(-2).join('.') : parts.join('.');
+  } catch { return url; }
+};
+
 function SitePreview({ url, src, title }) {
   if (!src) {
     return (
@@ -745,7 +784,7 @@ function SitePreview({ url, src, title }) {
               display: "flex", alignItems: "center", paddingLeft: 8,
             }}>
               <span style={{ fontSize: 9, color: "var(--text-muted)", fontFamily: "monospace" }}>
-                {url.replace("https://www.", "")}
+                {apexDomain(url)}
               </span>
             </div>
           </div>
@@ -778,7 +817,7 @@ function SitePreview({ url, src, title }) {
             display: "flex", alignItems: "center", paddingLeft: 8,
           }}>
             <span style={{ fontSize: 9, color: "var(--text-muted)", fontFamily: "monospace" }}>
-              {url.replace("https://www.", "")}
+              {apexDomain(url)}
             </span>
           </div>
         </div>
@@ -889,9 +928,8 @@ export default function Portfolio() {
 
   const navItems = [
     { label: "Projects", id: "projects" },
-    { label: "BMO Work", id: "bmo" },
+    { label: "Work", id: "bmo" },
     { label: "Websites", id: "websites" },
-    { label: "About", id: "about" },
   ];
 
   return (
@@ -943,11 +981,10 @@ export default function Portfolio() {
             fontSize: 17, color: "var(--text-secondary)", lineHeight: 1.75,
             maxWidth: 540, margin: "0 0 28px",
           }}>
-            Frontend-focused Full-Stack Developer and AI Product Engineer with 8 years of experience
-            shipping production applications for Fortune 500 financial institutions. Currently at BMO
-            InvestorLine via TCS, with deep roots in Angular, React, and enterprise-scale UI systems.
-            Building AI-powered side projects in personalization, agentic automation, and bilingual
-            product design on the side.
+            Frontend Engineer and Adobe Target specialist with 8 years of experience, around 5 at BMO
+            Financial Group. At BMO I own the personalization and experimentation stack, running A/B,
+            multivariate, and experience targeting campaigns across bmo.com, and building UI for
+            different products across BMO using React and Angular. Also shipping AI side projects in personalization, web analytics, auditing and agentic automation.
           </p>
           <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
             <HeroSocialLink label="LinkedIn" href="https://www.linkedin.com/in/ashwin-ramani/" iconName="linkedin" primary />
@@ -987,45 +1024,57 @@ export default function Portfolio() {
 
         {/* BMO */}
         <section id="bmo" className="section-main" style={{ padding: "2rem 0" }}>
-          <div style={{
-            background: "var(--bg-warm)",
-            border: "0.5px solid var(--border-light)",
-            borderRadius: "var(--radius-md)",
-            padding: "1.5rem",
-            marginBottom: "1.75rem",
-          }}>
+          <div style={{ marginBottom: "1.75rem" }}>
             <p style={{
               fontSize: 12, color: "var(--text-muted)", textTransform: "uppercase",
-              letterSpacing: "0.1em", margin: "0 0 4px",
-            }}>2021 to Present · via TCS</p>
+              letterSpacing: "0.1em", margin: "0 0 6px",
+            }}>2021 – Present · via TCS</p>
             <h2 style={{
-              fontSize: 24, fontWeight: 700, margin: "0 0 2px",
+              fontSize: 26, fontWeight: 700, margin: 0,
               color: "var(--text-primary)", fontFamily: "'Georgia',serif", letterSpacing: "-0.02em",
-            }}>BMO Financial Group</h2>
-            <p style={{ fontSize: 13, color: "var(--text-muted)", margin: 0 }}>Senior Frontend Engineer</p>
+            }}>Work Experience</h2>
           </div>
-          {BMO_GROUPS.map((group, idx) => {
-            const labelMargin = idx === 0 ? "0 0 2px" : "2rem 0 2px";
-            if (group.id === "personalization") return (
-              <div key={group.id}>
-                <p style={{ fontSize: 11, fontWeight: 600, color: "var(--text-muted)", margin: labelMargin, textTransform: "uppercase", letterSpacing: "0.06em" }}>{group.label}</p>
-                <BMOPersGroup group={group} />
+          <div style={{
+            border: "0.5px solid var(--border)", borderRadius: "var(--radius-lg)",
+            overflow: "hidden", background: "var(--bg-card)",
+            boxShadow: "var(--shadow-sm)",
+          }}>
+            <div className="bmo-card-header" style={{
+              padding: "1.75rem 1.75rem 1.5rem",
+              borderBottom: "0.5px solid var(--border-light)",
+              display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16,
+            }}>
+              <div>
+                <h3 style={{
+                  fontSize: 21, fontWeight: 700, margin: "0 0 2px",
+                  color: "var(--text-primary)", fontFamily: "'Georgia',serif", letterSpacing: "-0.02em",
+                }}>BMO Financial Group</h3>
+                <p style={{ fontSize: 13, color: "var(--text-muted)", margin: 0 }}>Developer</p>
               </div>
-            );
-            if (group.id === "wealth") return (
-              <div key={group.id}>
-                <p style={{ fontSize: 11, fontWeight: 600, color: "var(--text-muted)", margin: labelMargin, textTransform: "uppercase", letterSpacing: "0.06em" }}>{group.label}</p>
-                <BMOWealthGroup group={group} />
-              </div>
-            );
-            if (group.id === "compliance") return (
-              <div key={group.id}>
-                <p style={{ fontSize: 11, fontWeight: 600, color: "var(--text-muted)", margin: labelMargin, textTransform: "uppercase", letterSpacing: "0.06em" }}>{group.label}</p>
-                <BMOComplianceGroup group={group} />
-              </div>
-            );
-            return null;
-          })}
+              <img
+                src="https://www.google.com/s2/favicons?domain=bmo.com&sz=64"
+                alt="BMO"
+                style={{ width: 40, height: 40, borderRadius: 10, flexShrink: 0 }}
+              />
+            </div>
+            <div className="bmo-card-body" style={{ padding: "0 1.75rem" }}>
+              {BMO_GROUPS.map((group) => {
+                const labelRow = (
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", margin: "2rem 0 2px" }}>
+                    <p style={{ fontSize: 11, fontWeight: 600, color: "var(--text-muted)", margin: 0, textTransform: "uppercase", letterSpacing: "0.06em" }}>{group.label}</p>
+                    {group.role && <span style={{ fontSize: 11, color: "var(--text-muted)", fontWeight: 500 }}>{group.role}</span>}
+                  </div>
+                );
+                if (group.id === "personalization") return (
+                  <div key={group.id}>{labelRow}<BMOPersGroup group={group} /></div>
+                );
+                if (group.id === "wealth") return (
+                  <div key={group.id}>{labelRow}<BMOWealthGroup group={group} /></div>
+                );
+                return null;
+              })}
+            </div>
+          </div>
         </section>
 
         {/* WEBSITES */}
@@ -1047,15 +1096,7 @@ export default function Portfolio() {
 
         {/* ABOUT */}
         <section id="about" style={{ borderTop: "0.5px solid var(--border)", padding: "3rem 0 5rem" }}>
-          <p style={{
-            fontSize: 12, color: "var(--text-muted)", textTransform: "uppercase",
-            letterSpacing: "0.1em", margin: "0 0 6px",
-          }}>Background</p>
-          <h2 style={{
-            fontSize: 26, fontWeight: 700, margin: "0 0 1.5rem",
-            color: "var(--text-primary)", fontFamily: "'Georgia',serif", letterSpacing: "-0.02em",
-          }}>About</h2>
-          <div className="about-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem 3rem", marginBottom: "1.75rem" }}>
+          <div className="about-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.5rem 3rem" }}>
             <div style={{ background: "var(--bg-subtle)", borderRadius: "var(--radius-md)", padding: "1.25rem" }}>
               <p style={{ fontSize: 11, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.08em", margin: "0 0 8px" }}>Education</p>
               <p style={{ fontSize: 14, color: "var(--text-primary)", margin: "0 0 2px", fontWeight: 600 }}>MEng, Product Realization, GPA 3.7</p>
@@ -1066,24 +1107,29 @@ export default function Portfolio() {
             <div style={{ background: "var(--bg-subtle)", borderRadius: "var(--radius-md)", padding: "1.25rem" }}>
               <p style={{ fontSize: 11, color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.08em", margin: "0 0 8px" }}>Previous</p>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                {["Samsung", "TransLink", "Cognizant", "Zoho / WebNMS"].map(e => (
-                  <span key={e} style={{
+                {[
+                  { name: "Samsung", domain: "samsung.com" },
+                  { name: "TransLink", domain: "translink.ca" },
+                  { name: "State Street via Cognizant", domain: "cognizant.com" },
+                  { name: "Zoho", domain: "zoho.com" },
+                ].map(e => (
+                  <span key={e.name} style={{
+                    display: "inline-flex", alignItems: "center", gap: 6,
                     background: "var(--bg-inset)", border: "0.5px solid var(--border)",
                     fontSize: 12, padding: "4px 10px", borderRadius: 20,
                     color: "var(--text-secondary)",
-                  }}>{e}</span>
+                  }}>
+                    <img
+                      src={`https://www.google.com/s2/favicons?domain=${e.domain}&sz=32`}
+                      alt=""
+                      style={{ width: 13, height: 13, borderRadius: 2 }}
+                    />
+                    {e.name}
+                  </span>
                 ))}
               </div>
             </div>
           </div>
-          <p style={{ fontSize: 15, color: "var(--text-secondary)", lineHeight: 1.75, maxWidth: 560 }}>
-            AI Product Engineer and Full-Stack Developer with 8+ years shipping production-grade
-            applications for Fortune 500 financial institutions. I specialize in building AI-powered
-            products from concept to production, combining strong frontend work in React and Angular
-            with backend Node.js, Azure cloud infrastructure, and hands-on AI engineering using
-            GPT-5.2, RAG pipelines, and agentic browser automation. Deep MarTech background in
-            Adobe Target personalization and experimentation at banking scale.
-          </p>
         </section>
 
       </div>

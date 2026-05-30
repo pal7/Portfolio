@@ -91,3 +91,14 @@ a { color: inherit; }
     gap: 1.5rem !important;
   }
 }
+
+/* ── BMO card inner padding on mobile ── */
+@media (max-width: 640px) {
+  .bmo-card-header {
+    padding: 1.25rem !important;
+  }
+  .bmo-card-body {
+    padding-left: 1.1rem !important;
+    padding-right: 1.1rem !important;
+  }
+}
