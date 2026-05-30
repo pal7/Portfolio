@@ -91,7 +91,7 @@ const BMO_GROUPS = [
       "Adobe Analytics", "Adobe Launch", "Salesforce Marketing Cloud",
       "Angular 19", "TypeScript", "RxJS", "React", "Gatsby",
     ],
-    summary: "Designed and ran A/B, multivariate, and experience targeting campaigns on BMO retail banking pages, contributing to a 15% CTR uplift and 20% conversion improvement on high-traffic consumer journeys. Implemented Target activities using AT.js via VEC and Form-Based Composer across landing pages, CTAs, and form flows. Used Adobe Target APIs for real-time visibility into active campaigns and Adobe Launch to configure tag rules and activation triggers without full engineering deployments. Worked with analytics teams on A4T to measure campaign performance and share insights with stakeholders. Developed profile scripts and custom audience segments based on visitor behaviour, visit frequency, and session attributes. Did a POC on Salesforce Marketing Cloud to compare it against Adobe Target for our business, and used Salesforce MCP to run select campaigns.",
+    summary: "Ran A/B, multivariate, and experience targeting campaigns on BMO retail banking pages, contributing to a 15% CTR uplift and 20% conversion improvement. Implemented Target via AT.js, VEC, and Form-Based Composer, using Target APIs and Adobe Launch for deployment and real-time campaign visibility. Developed profile scripts and audience segments based on visitor behaviour. Ran a Salesforce MCP POC alongside Adobe Target and used it to run select campaigns.",
     tools: [
       {
         id: "pers-lib",
@@ -121,6 +121,7 @@ const BMO_GROUPS = [
     label: "BMO Wealth Digital",
     role: "Senior Frontend Engineer",
     description: "Frontend engineering across two flagship investing platforms serving Canadian retail and self-directed investors.",
+    summary: "Shipped Angular modules for InvestorLine covering investor workflows, RxJS state management, and REST API integration. Main contributor to SmartFolio's migration from AngularJS to Angular 19. Led OneTrust GDPR/CCPA SDK integration and PhishLabs security beacon integration across both platforms.",
     products: [
       {
         id: "investorline",
@@ -144,7 +145,7 @@ const BMO_GROUPS = [
         links: {
           web: "https://www.bmosmartfolio.com/client/#/onboarding/expectation-setting",
         },
-        contribution: "Led the migration from legacy AngularJS to Angular 19, rebuilding components, services, and routing to modern Angular patterns while keeping the platform live.",
+        contribution: "Main contributor to the migration from AngularJS to Angular 19, rebuilding components, services, and routing to modern Angular patterns while keeping the platform live.",
         stack: ["Angular 19", "AngularJS", "TypeScript", "RxJS"],
         previewImg: "/previews/sf.png",
       },
@@ -630,7 +631,8 @@ function BMOProductCard({ p }) {
 function BMOWealthGroup({ group }) {
   return (
     <div style={{ borderBottom: "0.5px solid var(--border)", padding: "2rem 0" }}>
-      <p style={{ fontSize: 13, color: "var(--text-muted)", margin: "0 0 4px" }}>{group.description}</p>
+      <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.75, margin: "0 0 6px" }}>{group.description}</p>
+      {group.summary && <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.75, margin: "0 0 16px" }}>{group.summary}</p>}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px,1fr))", gap: 12, marginTop: 16 }}>
         {group.products.map(p => <BMOProductCard key={p.id} p={p} />)}
       </div>
@@ -706,8 +708,8 @@ function BMOPersGroup({ group }) {
   const toggle = (id) => setOpenTools(v => ({ ...v, [id]: !v[id] }));
   return (
     <div style={{ borderBottom: "0.5px solid #e5e7eb", padding: "2rem 0" }}>
-      <p style={{ fontSize: 13, color: "var(--text-muted)", margin: "0 0 10px" }}>{group.description}</p>
-      <p style={{ fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.75, margin: "0 0 16px" }}>{group.summary}</p>
+      <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.75, margin: "0 0 6px" }}>{group.description}</p>
+      <p style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.75, margin: "0 0 16px" }}>{group.summary}</p>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 5, marginBottom: 20 }}>
         {group.stack.map(t => <Pill key={t} label={t} />)}
       </div>
